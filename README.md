@@ -1,3 +1,4 @@
+[<img src="https://travis-ci.org/dermatthes/html5-template.svg">](https://travis-ci.org/dermatthes/html5-template)
 
 # Html5 Template - Template Rendering
 angularjs-like inline-templates for PHP7.
