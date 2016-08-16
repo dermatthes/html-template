@@ -199,3 +199,7 @@ Big demo with ~2000 Lines of template-code
 Template-Parsing: <10ms
 Rendering: <15ms
 ```
+
+## Author
+
+Written 2016 by Matthias Leuffen http://leuffen.de
