@@ -1,0 +1,10 @@
+<doc>
+    <go-macro name="someMacro(param1, param2)">
+        <div>Hello world</div>
+        <div go-bind="param1">a</div><div go-bind="param2">b</div>
+    </go-macro>
+    <go-macro name="someMacro(param1, param2)">
+        <div>Hello world</div>
+        <div go-bind="param1">1</div><div go-bind="param2">1</div>
+    </go-macro>
+</doc>

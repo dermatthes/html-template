@@ -1,0 +1,10 @@
+<main some="" attribute="2">
+    Hier etwas text
+    <!--some comment-->
+    <sub1 go-if="name != 'matthes'">
+        <sub2> und hier</sub2>
+    </sub1>
+    <sub11 go-foreach="names as name">
+        <sub22 go-bind="name"></sub22>
+    </sub11>
+</main>

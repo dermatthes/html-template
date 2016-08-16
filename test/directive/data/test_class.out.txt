@@ -1,0 +1,4 @@
+<doc>
+    <div go-class="" class="someClass">
+    </div>
+</doc>

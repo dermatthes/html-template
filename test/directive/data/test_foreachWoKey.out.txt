@@ -1,0 +1,11 @@
+<doc>
+    <div go-foreach="">
+        <span go-bind="curVal">a</span>
+    </div>
+    <div go-foreach="">
+        <span go-bind="curVal">b</span>
+    </div>
+    <div go-foreach="">
+        <span go-bind="curVal">c</span>
+    </div>
+</doc>

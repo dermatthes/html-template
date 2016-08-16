@@ -1,0 +1,3 @@
+<doc>
+    <div go-if="varname == 'test'">OK</div>
+</doc>

@@ -1,0 +1,32 @@
+{
+    "name": "html5/template",
+    "type": "library",
+    "description": "Inline Templating component",
+    "keywords": ["html5", "template", "html"],
+    "homepage": "http://leuffen.de",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Matthias Leuffen",
+            "email": "matthes@leuffen.de"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "symfony/expression-language": "^3.1",
+        "symfony/yaml": "^3.1",
+        "html5/htmlreader": "*"
+    },
+    "autoload": {
+        "psr-4": { "Html5\\Template\\": "src/Template" },
+        "exclude-from-classmap": [
+            "/test/"
+        ]
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}

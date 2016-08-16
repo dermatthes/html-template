@@ -1,0 +1,109 @@
+<doc>
+    <elem go-repeat="100 index index">
+        <sub>
+            <sub go-if="index > 1">Nummer 2</sub>
+            <sub go-if="index > 0">
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">int</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.attributecount">$<var class="varname">attributeCount</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">string</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.baseuri">$<var class="varname">baseURI</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">int</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.depth">$<var class="varname">depth</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">bool</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.hasattributes">$<var class="varname">hasAttributes</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">bool</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.hasvalue">$<var class="varname">hasValue</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">bool</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.isdefault">$<var class="varname">isDefault</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">bool</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.isemptyelement">$<var class="varname">isEmptyElement</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">string</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.localname">$<var class="varname">localName</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">string</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.name">$<var class="varname">name</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">string</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.namespaceuri">$<var class="varname">namespaceURI</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">int</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.nodetype">$<var class="varname">nodeType</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">string</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.prefix">$<var class="varname">prefix</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">string</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.value">$<var class="varname">value</var></a></var>
+                        ;</div>
+
+                    <div class="fieldsynopsis">
+                        <span class="modifier">public</span>
+                        <span class="modifier">readonly</span>
+                        <span class="type">string</span>
+                        <var class="varname"><a href="class.xmlreader.php#xmlreader.props.xmllang">$<var class="varname">xmlLang</var></a></var>
+                        ;</div>
+
+            </sub>
+        </sub>
+
+    </elem>
+
+</doc>
