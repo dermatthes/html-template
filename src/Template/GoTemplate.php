@@ -39,13 +39,6 @@
 
 
 
-
-        public function getTemplateStore ()
-        {
-            return $this->mTemplateStore;
-        }
-
-
         public function addDirective(GoDirective $directive)
         {
             $this->mParser->addDirective($directive);

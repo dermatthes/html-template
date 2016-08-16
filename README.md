@@ -35,6 +35,14 @@ $template = new GoTemplate();
 echo $template->render("template.xhtml", ["showHeader" => true, "producs"=> [ new Product("prod1"), new Product("Product2)" ]]);
 ```
 
+
+## Install using Composer
+
+```
+composer require html5/template
+```
+
+
 ## Attributes
 
  * `go-if`: Condition
