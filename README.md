@@ -145,6 +145,8 @@ The data will be escaped by `htmlspecialchars()`
  * `go-dump`: Dump a variable or scope
  * `go-macro`: Define a macro
  * `go-callmacro`: Call a macro
+ * `go-struct`: Return array data sections defined by go-section
+ * `go-section`: Define or overwrite struct data
  
 
 ### Macros

@@ -34,6 +34,8 @@
         {
             $stmt = $node->attributes["go-repeat"];
 
+            $output = "";
+
             if (preg_match ('/^(.*)\s+index\s+([a-z0-9_]+)$/i', trim ($stmt), $matches)) {
                 $data = $execBag->expressionEvaluator->eval($matches[1], $scope);
                 for ($i = 0; $i < $data; $i++) {
@@ -49,7 +51,7 @@
                         continue;
                     }
                 }
-                return TRUE;
+                return $output;
 
             } else {
                 throw new \InvalidArgumentException("Cannot parse repeat '$stmt'");

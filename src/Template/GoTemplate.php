@@ -79,7 +79,27 @@
 
             $template = $this->mParser->parse();
 
-            return $template->run($scope, $this->mExecBag);
+            $ret = $template->run($scope, $this->mExecBag);
+            if (is_array($ret))
+                throw new \InvalidArgumentException("render() cannot handle go-struct. Use renderStruct() to return array data.");
+            return $ret;
+        }
+
+        public function renderStruct(string $inputTemplateData, array $scopeData, &$structOutputData = []) : array {
+            $scope = $this->mExecBag->scopePrototype;
+            foreach ($scopeData as $key => $val) {
+                $scope[$key] = $val;
+            }
+
+
+            $this->mParser->loadHtml($inputTemplateData);
+
+            $template = $this->mParser->parse();
+
+            $ret = $template->run($scope, $this->mExecBag);
+            if (is_string($ret))
+                throw new \InvalidArgumentException("renderStruct() must use go-struct. Use render() to return string data.");
+            return $ret;
         }
 
 
@@ -88,6 +108,10 @@
             return $this->render(file_get_contents($filename), $scopeData, $data);
         }
         
-        
+        public function renderStructHtmlFile($filename, array $scopeData = []) : array
+        {
+            return $this->renderStruct(file_get_contents($filename), $scopeData, $data);
+        }
+
 
     }

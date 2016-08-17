@@ -10,6 +10,7 @@
     namespace Html5\Template\Node;
 
 
+    use Html5\Template\Directive\Ex\GoReturnDataException;
     use Html5\Template\Directive\GoDirectiveExecBag;
 
     class GoDocumentNode implements GoNode {
@@ -27,10 +28,14 @@
 
 
         public function run(array $scope, GoDirectiveExecBag $execBag) {
-            $output = $this->processingInstructions;
-            foreach ($this->childs as $child) {
-                $output .= $child->run($scope, $execBag);
+            try {
+                $output = $this->processingInstructions;
+                foreach ($this->childs as $child) {
+                    $output .= $child->run($scope, $execBag);
+                }
+                return $output;
+            } catch (GoReturnDataException $e) {
+                return $e->getDataToReturn();
             }
-            return $output;
         }
     }

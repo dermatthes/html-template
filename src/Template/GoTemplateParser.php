@@ -13,11 +13,15 @@
     use Html5\Template\Directive\GoClassDirective;
     use Html5\Template\Directive\GoDirective;
     use Html5\Template\Directive\GoDumpDirective;
+    use Html5\Template\Directive\GoExtendsDirective;
     use Html5\Template\Directive\GoForeachDirective;
+    use Html5\Template\Directive\GoHtmlDirective;
     use Html5\Template\Directive\GoIfDirective;
     use Html5\Template\Directive\GoInlineTextDirective;
     use Html5\Template\Directive\GoMacroDirective;
     use Html5\Template\Directive\GoRepeatDirective;
+    use Html5\Template\Directive\GoSectionDirective;
+    use Html5\Template\Directive\GoStructDirective;
     use Html5\Template\Node\GoCommentNode;
     use Html5\Template\Node\GoDocumentNode;
     use Html5\Template\Node\GoElementNode;
@@ -48,12 +52,16 @@
             $this->addDirective(new GoIfDirective());
             $this->addDirective(new GoForeachDirective());
             $this->addDirective(new GoBindDirective());
+            $this->addDirective(new GoHtmlDirective());
             $this->addDirective(new GoClassDirective());
             $this->addDirective(new GoRepeatDirective());
             $this->addDirective(new GoMacroDirective());
             $this->addDirective(new GoCallMacroDirective());
             $this->addDirective(new GoDumpDirective());
             $this->addDirective(new GoInlineTextDirective());
+            $this->addDirective(new GoSectionDirective());
+            $this->addDirective(new GoStructDirective());
+            $this->addDirective(new GoExtendsDirective());
 
             $this->htmlReader = new HTMLReader();
         }

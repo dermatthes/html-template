@@ -28,5 +28,5 @@
 
         public $scopePrototype = [];
 
-        public $returnScope = [];
+        public $dataToReturnScope = [];
     }

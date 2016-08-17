@@ -32,6 +32,8 @@
         {
             $stmt = $node->attributes["go-foreach"];
 
+            $output = "";
+
 
             if (preg_match ('/^(.*)\s+as\s+([a-z0-9_]+)$/i', trim ($stmt), $matches)) {
                 $data = $execBag->expressionEvaluator->eval($matches[1], $scope);
@@ -47,7 +49,7 @@
                         continue;
                     }
                 }
-                return TRUE;
+                return $output;
             } else if (preg_match ('/^(.*)\s+as\s+([a-z0-9_]+)\s*=>\s*([a-z0-9_])$/i', trim ($stmt), $matches)) {
                 $data = $execBag->expressionEvaluator->eval($matches[1], $scope);
                 foreach ($data as $key => $val) {
@@ -63,7 +65,7 @@
                         continue;
                     }
                 }
-                return TRUE;
+                return $output;
             } else {
                 throw new \InvalidArgumentException("Cannot parse foreach '$stmt'");
             }

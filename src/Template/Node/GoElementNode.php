@@ -30,6 +30,9 @@
          */
         public $useDirectives = [];
 
+        /**
+         * @var GoNode[]
+         */
         public $childs = [];
 
 
@@ -68,21 +71,18 @@
         public function run(array $scope, GoDirectiveExecBag $execBag) {
             $output = null;
 
-            $curNode = clone $this;
+            $curNodeOrOutput = clone $this;
             foreach ($this->useDirectives as $curDirective) {
-                $curNode = $curDirective->exec($curNode, $scope, $output, $execBag);
-                if ($curNode === false) {
+                $curNodeOrOutput = $curDirective->exec($curNodeOrOutput, $scope, $output, $execBag);
+                if ($curNodeOrOutput === false) {
                     return null;
                 }
-                if ($curNode === true) {
-                    return $output;
-                }
-                if (is_string($curNode)) {
-                    return $curNode;
+                if (is_string($curNodeOrOutput)) {
+                    return $curNodeOrOutput;
                 }
             }
-            if ($curNode instanceof GoElementNode)
-                $output = $curNode->render($scope, $execBag);
+            if ($curNodeOrOutput instanceof GoElementNode)
+                $output = $curNodeOrOutput->render($scope, $execBag);
 
             return $output;
         }
