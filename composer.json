@@ -24,6 +24,12 @@
             "/test/"
         ]
     },
+    "archive": {
+        "exclude": [
+            "!/src",
+            "!/README.md"
+        ]
+    },
     "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
