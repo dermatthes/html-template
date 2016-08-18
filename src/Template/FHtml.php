@@ -65,15 +65,25 @@
             $this->curNode->childs[] = $newNode;
             $newNode->parent = $this->curNode;
 
-            $this->curNode = $newNode;
-            return $this;
+
+            return $this->cloneit($newNode);
         }
+
+        private function cloneit ($curNode) : FHtml {
+            $new = new self();
+            $new->jumpMarks =& $this->jumpMarks;
+            $new->curNode = $curNode;
+            $new->documentNode = $this->documentNode;
+            $new->directiveBag = $this->directiveBag;
+            $new->template = $this->template;
+            return $new;
+        }
+
 
         public function end() : self {
             if ( ! isset ($this->curNode->parent))
                 throw new \InvalidArgumentException("end(): Node has no parent.");
-            $this->curNode = $this->curNode->parent;
-            return $this;
+            return $this->cloneit($this->curNode->parent);
         }
 
         public function as($name) : self {
@@ -84,8 +94,8 @@
         public function goto($name) : self {
             if ( ! isset($this->jumpMarks[$name]))
                 throw new \InvalidArgumentException("goto($name) undefined.");
-            $this->curNode = $this->jumpMarks[$name];
-            return $this;
+           $this->jumpMarks[$name];
+            return $this->cloneit($this->jumpMarks[$name]);
         }
 
         public function text($content) : self {
@@ -94,8 +104,7 @@
 
 
         public function root() : self {
-            $this->curNode = $this->documentNode;
-            return $this;
+            return $this->cloneit($this->documentNode);
         }
 
         public function getDocument() : GoDocumentNode {
