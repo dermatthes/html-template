@@ -15,7 +15,7 @@
     use Html5\Template\Expression\GoExpressionEvaluator;
     use Html5\Template\Expression\Scope;
 
-    class GoTemplate
+    class HtmlTemplate
     {
 
         /**
@@ -65,6 +65,14 @@
             $this->mExecBag->scopePrototype = $scope;
         }
 
+
+        public function getParser () : GoTemplateParser{
+            return $this->mParser;
+        }
+
+        public function getExecBag () : GoDirectiveExecBag {
+            return $this->mExecBag;
+        }
 
 
         public function render(string $inputTemplateData, array $scopeData, &$structOutputData = []) : string

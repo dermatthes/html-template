@@ -9,14 +9,14 @@
     namespace Gismo\Test\Component;
 
 
-    use Html5\Template\GoTemplate;
+    use Html5\Template\HtmlTemplate;
 
     class StructTest extends \PHPUnit_Framework_TestCase {
 
 
         public function testGoStructReturnsStructuredData () {
 
-            $t = new GoTemplate();
+            $t = new HtmlTemplate();
             $ret = $t->renderStructHtmlFile(__DIR__ . "/tpl/StructTest.html", []);
 
             self::assertEquals(["param1"=>"Some Data", "content"=>"Some Other"], $ret);

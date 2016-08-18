@@ -78,6 +78,11 @@
         }
 
 
+        public function getDirectiveBag() : GoTemplateDirectiveBag {
+            return $this->directiveBag;
+        }
+
+
         /**
          * @var \XMLReader
          */

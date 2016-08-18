@@ -9,7 +9,7 @@
     namespace Gismo\Test\Component;
 
 
-    use Html5\Template\GoTemplate;
+    use Html5\Template\HtmlTemplate;
 
     class ParserTest extends \PHPUnit_Framework_TestCase
     {
@@ -19,7 +19,7 @@
         {
             $inputContent = file_get_contents(__DIR__ . "/mockfiles/testWhiteSpaceParsing.xml");
     
-            $parser = new GoTemplate();
+            $parser = new HtmlTemplate();
             $output = $parser->render($inputContent, []);
     
             $this->assertEquals($inputContent, $output);

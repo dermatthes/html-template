@@ -31,7 +31,7 @@ Template:
 
 Parser:
 ```php
-$template = new GoTemplate();
+$template = new HtmlTemplate();
 echo $template->render("template.xhtml", ["showHeader" => true, "producs"=> [ new Product("prod1"), new Product("Product2)" ]]);
 ```
 

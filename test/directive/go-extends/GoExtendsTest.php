@@ -1,7 +1,7 @@
 <?php
     namespace Gismo\Test\Component;
     use Html5\Template\Directive\GoExtendsDirective;
-    use Html5\Template\GoTemplate;
+    use Html5\Template\HtmlTemplate;
 
     /**
      * Created by PhpStorm.
@@ -13,7 +13,7 @@
 
 
         public function testExtensWorks () {
-            $g = new GoTemplate();
+            $g = new HtmlTemplate();
             $g->getDirective(GoExtendsDirective::class)
                     ->setExtendsCallback(function (string $name, array $sectionData) use ($g) {
                         return $g->renderHtmlFile(__DIR__ . "/tpl/" . $name, $sectionData); // This data is passed

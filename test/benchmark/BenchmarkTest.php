@@ -1,7 +1,7 @@
 <?php
 
     namespace Gismo\Test\Component;
-    use Html5\Template\GoTemplate;
+    use Html5\Template\HtmlTemplate;
     use Html5\Template\GoTemplateParser;
 
     /**
@@ -17,7 +17,7 @@
         public function testGeneratedDocumentMatchesInputDocument() 
         {
             $time = microtime(true);
-            $parser = new GoTemplate();
+            $parser = new HtmlTemplate();
     
             $inputContent = file_get_contents(__DIR__ . "/benchmark.xml");
     

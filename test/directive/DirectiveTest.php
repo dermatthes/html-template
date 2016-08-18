@@ -10,13 +10,13 @@
     
     namespace Gismo\Test\Component;
 
-    use Html5\Template\GoTemplate;
+    use Html5\Template\HtmlTemplate;
 
     class DirectiveTest extends \PHPUnit_Framework_TestCase {
 
         
         public function testAllDirectives () {
-            $parser = new GoTemplate();
+            $parser = new HtmlTemplate();
             foreach (scandir(__DIR__ . "/data") as $file) {
                 if (preg_match ("/(.*)\\.php/", $file, $matches)) {
                     $inFile = __DIR__ . "/data/$file";
