@@ -178,26 +178,6 @@ To generate your Table use `go-callmacro` - Element:
 ```
 
 
-
-## FHtml
-
-Write HTML Quicker
-
-```
-
-goHtml()
-    ->div["class=someName"]["id=someId"]("Some Text")
-        ->span("Other Text")
-
-goHtml()
-    ["div1 @class=class1 class2 @id={{someId}}"]
-        ["div2"]
-            ["div3 @go-repeat=100"]
-    ["/div1"] 
-
-```
-
-
 ## Benchmark
 
 Small Example from above:
