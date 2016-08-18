@@ -111,7 +111,7 @@
             return $this->documentNode;
         }
 
-        public function render(array $data) : string {
+        public function render(array $data = []) : string {
             return $this->documentNode->run($data, $this->template->getExecBag());
         }
 
