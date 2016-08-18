@@ -73,6 +73,11 @@
             $this->curNode->childs[] = $newNode;
             $newNode->parent = $this->curNode;
 
+            if ($newNode->parent instanceof GoDocumentNode) {
+                $newNode->preWhiteSpace = "\n";
+            } else {
+                $newNode->preWhiteSpace = $newNode->parent->preWhiteSpace . "    ";
+            }
 
             return $this->cloneit($newNode);
         }
