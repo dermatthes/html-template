@@ -26,6 +26,8 @@
     },
     "archive": {
         "exclude": [
+            "*",
+            ".*",
             "!/src",
             "!/README.md"
         ]
