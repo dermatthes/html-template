@@ -49,6 +49,7 @@
             $ret = "{$this->preWhiteSpace}<{$this->name}";
             $attrs = [];
             foreach ($this->attributes as $name=>$val) {
+                $val = htmlspecialchars($val);
                 $attrs[] = "{$name}=\"{$val}\"";
             }
             if (count ($attrs) > 0)
