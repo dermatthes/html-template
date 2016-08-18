@@ -24,6 +24,10 @@
         private $template;
         private $directiveBag;
         private $documentNode;
+
+        /**
+         * @var GoElementNode
+         */
         private $curNode;
         private $jumpMarks = [];
 
@@ -62,6 +66,13 @@
             $newNode->parent = $this->curNode;
 
             $this->curNode = $newNode;
+            return $this;
+        }
+
+        public function end() : self {
+            if ( ! isset ($this->curNode->parent))
+                throw new \InvalidArgumentException("end(): Node has no parent.");
+            $this->curNode = $this->curNode->parent;
             return $this;
         }
 
