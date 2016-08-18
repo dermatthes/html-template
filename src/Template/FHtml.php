@@ -53,13 +53,36 @@
          * @return FHtml
          */
         public function elem($def) : self {
-            $arr = explode("@", $def);
+            if (is_string($def)) {
+                $paramStr = $def;
+            } else if (is_array($def)) {
+                $paramStr = array_shift($def);
+                $arrayArgs = $def;
+            } else {
+                throw new \InvalidArgumentException("Invalid string or array in input: elem(" . gettype($def). ")");
+            }
+
+
+            $arr = explode("@", $paramStr);
             $tagName = trim (array_shift($arr));
 
             $attrs = [];
+            $qmIndex = 0;
             foreach ($arr as $attdef) {
                 list ($key, $val) = explode("=", $attdef, 2);
-                $attrs[trim($key)] = trim ($val);
+                if ( ! isset ($val)) {
+                    $attrs[trim ($key)] = null;
+                    continue;
+                }
+
+                $val = trim ($val);
+                if (isset ($arrayArgs)) {
+                    if ($val == "?" && isset ($arrayArgs[$qmIndex])) {
+                        $val = $arrayArgs[$qmIndex];
+                        $qmIndex++;
+                    }
+                }
+                $attrs[trim($key)] = $val;
             }
 
 
