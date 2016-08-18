@@ -31,7 +31,7 @@
         private $curNode;
         private $jumpMarks = [];
 
-        private $emptyTags = ["meta"=>true, "img"=>true, "br"=>true, "hr"=>true];
+        private $emptyTags = ["meta"=>true, "img"=>true, "br"=>true, "hr"=>true, "input"=>true];
 
         public function __construct(HtmlTemplate $bindParser=null) {
             if ($bindParser === null)
