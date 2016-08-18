@@ -43,7 +43,7 @@
         public function execText($inputText, GoNode $owner=null, array $scope, &$output, GoDirectiveExecBag $execBag) {
             $ret = preg_replace_callback("/{$this->mStartDelimiter}(.*?){$this->mEndDelimiter}/im",
                     function ($matches) use (&$scope, $execBag) {
-                        return htmlspecialchars($execBag->expressionEvaluator->eval($matches[1], $scope));
+                        return $execBag->expressionEvaluator->eval($matches[1], $scope);
                     },
                     $inputText
             );

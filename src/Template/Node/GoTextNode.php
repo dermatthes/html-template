@@ -30,9 +30,9 @@
 
 
         public function render (array $scope, GoDirectiveExecBag $execBag) {
-            $text = $this->text;
+            $text = htmlspecialchars($this->text);
             if ($this->mInlineTextDirective !== null) {
-                $text = $this->mInlineTextDirective->execText($this->text, null, $scope, $output, $execBag);
+                $text = htmlspecialchars($this->mInlineTextDirective->execText($this->text, null, $scope, $output, $execBag));
             }
 
             return $this->preWhiteSpace . $text;

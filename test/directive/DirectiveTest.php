@@ -30,7 +30,8 @@
                     ob_end_clean();
                     
                     $ret = $parser->render($content, $IN);
-                    
+
+
                     $this->assertEquals (file_get_contents($compFile), $ret, "$file");
                     
                     
