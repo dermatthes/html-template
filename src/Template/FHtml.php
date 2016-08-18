@@ -31,6 +31,8 @@
         private $curNode;
         private $jumpMarks = [];
 
+        private $emptyTags = ["meta"=>true, "img"=>true, "br"=>true, "hr"=>true];
+
         public function __construct(HtmlTemplate $bindParser=null) {
             if ($bindParser === null)
                 $bindParser = new HtmlTemplate();
@@ -60,7 +62,12 @@
                 $attrs[trim($key)] = trim ($val);
             }
 
+
+
+
             $newNode = new GoElementNode();
+            if (isset ($this->emptyTags[$tagName]))
+                $newNode->isEmptyElement = true;
             $newNode->name = $tagName;
             $newNode->attributes = $attrs;
             $this->curNode->childs[] = $newNode;
