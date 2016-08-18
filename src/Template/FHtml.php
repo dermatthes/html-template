@@ -48,6 +48,7 @@
          * $e->elem("div @class = a b c @name = some Name")
          *
          * @param $def
+         * @return FHtml
          */
         public function elem($def) : self {
             $arr = explode("@", $def);
@@ -100,6 +101,7 @@
 
         public function text($content) : self {
             $this->curNode->childs[] = new GoTextNode($content);
+            return $this;
         }
 
 
