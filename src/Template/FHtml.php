@@ -55,7 +55,7 @@
 
             $attrs = [];
             foreach ($arr as $attdef) {
-                list ($key, $val) = explode("=", $attdef, 1);
+                list ($key, $val) = explode("=", $attdef, 2);
                 $attrs[trim($key)] = trim ($val);
             }
 
