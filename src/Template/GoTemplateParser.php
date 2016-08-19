@@ -9,6 +9,7 @@
     namespace Html5\Template;
     
     use Html5\Template\Directive\GoBindDirective;
+    use Html5\Template\Directive\GoCallDirective;
     use Html5\Template\Directive\GoCallMacroDirective;
     use Html5\Template\Directive\GoClassDirective;
     use Html5\Template\Directive\GoDirective;
@@ -62,6 +63,7 @@
             $this->addDirective(new GoSectionDirective());
             $this->addDirective(new GoStructDirective());
             $this->addDirective(new GoExtendsDirective());
+            $this->addDirective(new GoCallDirective());
 
             $this->htmlReader = new HTMLReader();
         }
