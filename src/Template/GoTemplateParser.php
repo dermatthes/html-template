@@ -107,7 +107,7 @@
             
             $reader->setHandler(new class ($rootNode, $this->directiveBag) implements HtmlCallback {
 
-                private $html5EmptyTags = ["img", "meta", "br", "hr", "input"]; // Tags to treat as empty although they're not
+                private $html5EmptyTags = ["img", "meta", "br", "hr", "input", "link"]; // Tags to treat as empty although they're not
 
                 /**
                  * @var GoNode
