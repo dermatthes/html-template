@@ -13,6 +13,7 @@
 
     use Html5\Template\Directive\GoDirective;
     use Html5\Template\Directive\GoDirectiveExecBag;
+    use Html5\Template\Directive\GoInlineTextDirective;
 
     class GoElementNode implements GoNode {
         public $parent = null;
@@ -34,10 +35,17 @@
          * @var GoNode[]
          */
         public $childs = [];
-
+        /**
+         * @var GoInlineTextDirective
+         */
+        private $mInlineTextDirective;
 
         public function useDirective(GoDirective $directive) {
             $this->useDirectives[$directive->getPriority()] = $directive;
+        }
+
+        public function useInlineTextDirective (GoInlineTextDirective $directive) {
+            $this->mInlineTextDirective = $directive;
         }
 
         public function postInit () {
@@ -49,6 +57,8 @@
             $ret = "{$this->preWhiteSpace}<{$this->name}";
             $attrs = [];
             foreach ($this->attributes as $name=>$val) {
+
+                $val = $this->mInlineTextDirective->execText($val, null, $scope, $output, $execBag);
                 $val = htmlspecialchars($val);
                 $attrs[] = "{$name}=\"{$val}\"";
             }

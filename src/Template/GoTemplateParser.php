@@ -142,6 +142,8 @@
                         $newNode->isEmptyElement = true;
                     }
 
+                    $newNode->useInlineTextDirective($this->directiveBag->textDirective);
+
                     if (isset ($this->directiveBag->elemToDirective[$newNode->name])) {
                         $newNode->useDirective($this->directiveBag->elemToDirective[$newNode->name]);
                     }
