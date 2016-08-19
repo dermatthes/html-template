@@ -1,0 +1,11 @@
+<doc>
+    <div go-foreach="">
+        <span class="a"></span>
+    </div>
+    <div go-foreach="">
+        <span class="b"></span>
+    </div>
+    <div go-foreach="">
+        <span class="c"></span>
+    </div>
+</doc>
