@@ -45,6 +45,7 @@
             $callName = $matches[1];
             $params = $matches[2];
 
+            $params = $execBag->expressionEvaluator->yaml($params, $scope);
 
             return ($this->callback)($callName, $params);
         }
