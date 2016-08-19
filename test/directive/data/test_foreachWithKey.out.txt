@@ -1,11 +1,11 @@
 <doc>
     <div go-foreach="">
-        <span class="a"></span>
+        <span class="a">vala</span>
     </div>
     <div go-foreach="">
-        <span class="b"></span>
+        <span class="b">valb</span>
     </div>
     <div go-foreach="">
-        <span class="c"></span>
+        <span class="c">valc</span>
     </div>
 </doc>

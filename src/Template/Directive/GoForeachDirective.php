@@ -50,7 +50,7 @@
                     }
                 }
                 return $output;
-            } else if (preg_match ('/([a-z0-9_\\.]+)\s+as\s+([a-z0-9_]+)\s*=\\>\s*([a-z0-9_])/i', trim ($stmt), $matches)) {
+            } else if (preg_match ('/([a-z0-9_\\.]+)\s+as\s+([a-z0-9_]+)\s*=\\>\s*([a-z0-9_]+)/i', trim ($stmt), $matches)) {
                 $data = $execBag->expressionEvaluator->eval($matches[1], $scope);
                 foreach ($data as $key => $val) {
                     $scope[$matches[2]] = $key;
