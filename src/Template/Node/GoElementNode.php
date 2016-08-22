@@ -58,7 +58,11 @@
             $attrs = [];
             foreach ($this->attributes as $name=>$val) {
 
-                $val = $this->mInlineTextDirective->execText($val, null, $scope, $output, $execBag);
+                if ($this->mInlineTextDirective !== null) {
+                    $val = $this->mInlineTextDirective->execText($val, NULL, $scope, $output, $execBag);
+                } else {
+
+                }
                 $val = htmlspecialchars($val);
                 $attrs[] = "{$name}=\"{$val}\"";
             }
