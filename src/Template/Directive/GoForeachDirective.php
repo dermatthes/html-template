@@ -37,6 +37,8 @@
 
             if (preg_match ('/^(.*)\s+as\s+([a-z0-9_]+)$/i', trim ($stmt), $matches)) {
                 $data = $execBag->expressionEvaluator->eval($matches[1], $scope);
+                if ( ! is_array($data))
+                    return "";
                 foreach ($data as $curElem) {
                     $scope[$matches[2]] = $curElem;
                     $clone = clone $node;
@@ -52,6 +54,8 @@
                 return $output;
             } else if (preg_match ('/([a-z0-9_\\.]+)\s+as\s+([a-z0-9_]+)\s*=\\>\s*([a-z0-9_]+)/i', trim ($stmt), $matches)) {
                 $data = $execBag->expressionEvaluator->eval($matches[1], $scope);
+                if ( ! is_array($data))
+                    return "";
                 foreach ($data as $key => $val) {
                     $scope[$matches[2]] = $key;
                     $scope[$matches[3]] = $val;
