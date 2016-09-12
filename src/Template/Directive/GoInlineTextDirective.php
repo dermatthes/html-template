@@ -34,7 +34,7 @@
 
         }
 
-        public function exec(GoElementNode $node, array $scope, &$output, GoDirectiveExecBag $execBag)
+        public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
 
             throw new \InvalidArgumentException("Cannot exec on textNode");

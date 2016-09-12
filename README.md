@@ -149,6 +149,13 @@ The data will be escaped by `htmlspecialchars()`
  * `go-section`: Define or overwrite struct data
  
 
+
+### Interceptors
+
+
+
+
+
 ### Macros
 
 Macros can be used to create Output on multiple positions. To define a macro use the `go-macro`-Element:

@@ -34,9 +34,11 @@
         }
 
 
-        public function exec(GoElementNode $node, array $scope, &$output, GoDirectiveExecBag $execBag)
+        public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
             $name = $node->attributes["name"];
+
+            $as = @$node->attributes["as"];
 
             if ( ! preg_match ("|([a-z0-9_\\.]+)\\s*\\((.*)\\)|i", trim ($name), $matches)) {
                 throw new \InvalidArgumentException("Cannot parse call name='$name'");
@@ -46,7 +48,13 @@
             $params = $matches[2];
 
             $params = $execBag->expressionEvaluator->yaml($params, $scope);
+            $ret = ($this->callback)($callName, $params);
 
-            return ($this->callback)($callName, $params);
+            if ($as !== null) {
+                $scope[$as] = $ret;
+                return null;
+            }
+
+            return $ret;
         }
     }

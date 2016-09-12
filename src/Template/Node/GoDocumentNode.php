@@ -20,14 +20,20 @@
         public $childs = [];
 
 
-        public function render(array $scope, GoDirectiveExecBag $execBag) {
+
+        public function intercept($name) {
+            
+        }
+
+
+        public function render(array &$scope, GoDirectiveExecBag $execBag) {
             
         }
 
 
 
 
-        public function run(array $scope, GoDirectiveExecBag $execBag) {
+        public function run(array &$scope, GoDirectiveExecBag $execBag) {
             try {
                 $output = $this->processingInstructions;
                 foreach ($this->childs as $child) {

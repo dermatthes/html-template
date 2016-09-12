@@ -30,7 +30,7 @@
             return 50;
         }
 
-        public function exec(GoElementNode $node, array $scope, &$output, GoDirectiveExecBag $execBag)
+        public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
             $stmt = $node->attributes["go-repeat"];
 

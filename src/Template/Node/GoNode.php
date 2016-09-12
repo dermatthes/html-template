@@ -13,8 +13,8 @@
 
     interface GoNode {
 
-        public function render(array $scope, GoDirectiveExecBag $execBag);
+        public function render(array &$scope, GoDirectiveExecBag $execBag);
 
-        public function run(array $scope, GoDirectiveExecBag $execBag);
+        public function run(array &$scope, GoDirectiveExecBag $execBag);
 
     }

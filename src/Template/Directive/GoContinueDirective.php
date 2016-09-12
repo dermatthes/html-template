@@ -28,7 +28,7 @@
             return -1;
         }
 
-        public function exec(GoElementNode $node, array $scope, &$output, GoDirectiveExecBag $execBag)
+        public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
             throw new GoContinueLoopException("Loop continue on line {$node->lineNo}");
         }

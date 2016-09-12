@@ -24,7 +24,7 @@
             return 12;
         }
 
-        public function exec(GoElementNode $node, array $scope, &$output, GoDirectiveExecBag $execBag) {
+        public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag) {
             $name = $node->attributes["name"];
             if ( ! preg_match ("|([a-z0-9_]+)\\s*\\((.*)\\)|i", trim ($name), $matches)) {
                 throw new \InvalidArgumentException("Cannot parse macro name='$name'");

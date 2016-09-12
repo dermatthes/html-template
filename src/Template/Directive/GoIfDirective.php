@@ -26,7 +26,7 @@
             return 999;
         }
 
-        public function exec(GoElementNode $node, array $scope, &$output, GoDirectiveExecBag $execBag)
+        public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
             $code = $node->attributes["go-if"];
             if ($execBag->expressionEvaluator->eval($code, $scope)) {

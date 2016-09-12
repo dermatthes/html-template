@@ -53,7 +53,7 @@
         }
 
 
-        public function render(array $scope, GoDirectiveExecBag $execBag) {
+        public function render(array &$scope, GoDirectiveExecBag $execBag) {
             $ret = "{$this->preWhiteSpace}<{$this->name}";
             $attrs = [];
             foreach ($this->attributes as $name=>$val) {
@@ -83,7 +83,7 @@
             return $ret;
         }
 
-        public function run(array $scope, GoDirectiveExecBag $execBag) {
+        public function run(array &$scope, GoDirectiveExecBag $execBag) {
             $output = null;
 
             $curNodeOrOutput = clone $this;
