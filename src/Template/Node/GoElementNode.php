@@ -63,7 +63,7 @@
                 } else {
 
                 }
-                $val = htmlspecialchars($val);
+                $val = htmlspecialchars(html_entity_decode($val));
                 $attrs[] = "{$name}=\"{$val}\"";
             }
             if (count ($attrs) > 0)
