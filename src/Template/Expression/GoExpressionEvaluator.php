@@ -36,7 +36,7 @@
         }
         
         public function yaml($expression, array $scope) {
-            $type = Yaml::parse($expression, Yaml::PARSE_OBJECT);
+            $type = Yaml::parse(trim($expression));
             if (is_array($type)) {
                 foreach ($type as $key => $val) {
                     $type[$key] = $this->eval($val, $scope);
