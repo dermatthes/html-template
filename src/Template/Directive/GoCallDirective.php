@@ -79,9 +79,14 @@
                         }
                     }
                     if ($parse == "JSON") {
-                        $params = json_decode($code, true);
+                        $params = json_decode($code);
                         if ($params === null)
                             throw new ParseException("Cannot parse json string");
+                        $arrVal = [];
+                        foreach ($params as $key => $value) {
+                            $arrVal[$key] = $value;
+                        }
+                        $params = $arrVal;
                     } else if ($parse == "YAML") {
                         $params = $execBag->expressionEvaluator->yaml($code, $scope);
                     }
