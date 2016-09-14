@@ -83,7 +83,7 @@
                         if ($params === null)
                             throw new ParseException("Cannot parse json string");
                     } else if ($parse == "YAML") {
-                        $params = $execBag->expressionEvaluator->yaml($params, $scope);
+                        $params = $execBag->expressionEvaluator->yaml($code, $scope);
                     }
 
                 } catch (ParseException $e) {
