@@ -79,7 +79,7 @@
                         }
                     }
                     if ($parse == "JSON") {
-                        $params = json_decode($code);
+                        $params = json_decode($code, false);
                         if ($params === null)
                             throw new ParseException("Cannot parse json string");
                         $arrVal = [];
