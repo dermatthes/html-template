@@ -43,6 +43,8 @@
 
             $as = @$node->attributes["as"];
             $datasource = @$node->attributes["datasource"];
+            $parse = isset ($node->attributes["parse"]) ? $node->attributes["parse"] : "json";
+            $parse = trim (strtoupper($parse));
 
             if ( ! preg_match ("|([a-z0-9_\\.]+)\\s*(\\((.*)\\))?|i", trim ($name), $matches)) {
                 throw new \InvalidArgumentException("Cannot parse call name='$name'");
@@ -65,15 +67,25 @@
                 $params = $execBag->expressionEvaluator->yaml($params, $scope);
             } else {
                 try {
+                    $code = "";
                     if (count($node->childs) > 0) {
                         $child = $node->childs[0];
+
                         if ($child instanceof GoTextNode) {
-                            $params = $execBag->expressionEvaluator->yaml($child->text, $scope);
+                            $code = $child->text;
                         }
                         if ($child instanceof GoCommentNode) {
-                            $params = $execBag->expressionEvaluator->yaml($child->text, $scope);
+                            $code = $child->text;
                         }
                     }
+                    if ($parse == "JSON") {
+                        $params = json_decode($code, true);
+                        if ($params === null)
+                            throw new ParseException("Cannot parse json string");
+                    } else if ($parse == "YAML") {
+                        $params = $execBag->expressionEvaluator->yaml($params, $scope);
+                    }
+
                 } catch (ParseException $e) {
                     throw new ParseException("Cannot parse: {$e->getMessage()}\n{$child->text}", -1, null, null, $e);
                 }
