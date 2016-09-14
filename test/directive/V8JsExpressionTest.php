@@ -18,7 +18,7 @@
         function testScope () {
             $eval = new V8ExpressionEvaluator();
             $scope = ["cde" => "wurst"];
-            var_dump($eval->eval("{abc: cde}", $scope));
+            var_dump($eval->eval("{abc: 'cde'}", $scope));
         }
 
 
@@ -32,7 +32,7 @@
             for ($i= 0; $i<1000; $i++) {
                 $scope["data"] = "some $i";
                 //$eval->eval("{some: data}", $scope);
-                $eval->eval("$.data", $scope);
+                $eval->eval("'yea'", $scope);
             }
             echo "\nTime: " . (microtime(true) - $time);
         }

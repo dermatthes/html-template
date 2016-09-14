@@ -11,6 +11,7 @@
 
     use Html5\Template\GoTemplateDirectiveBag;
     use Html5\Template\Node\GoElementNode;
+    use Html5\Template\Node\GoRawHtmlNode;
 
     class GoHtmlDirective implements GoDirective {
 
@@ -36,7 +37,7 @@
 
             $clone = clone $node;
             if ($val !== null)
-                $clone->childs = [$val];
+                $clone->childs = [new GoRawHtmlNode($val)];
             return $clone;
         }
 
