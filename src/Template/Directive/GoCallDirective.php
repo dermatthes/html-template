@@ -12,6 +12,7 @@
     use Html5\Template\Node\GoElementNode;
     use Html5\Template\GoTemplateDirectiveBag;
     use Html5\Template\Node\GoTextNode;
+    use Symfony\Component\Yaml\Exception\ParseException;
 
     class GoCallDirective implements GoDirective
     {
@@ -63,14 +64,18 @@
                 $params = $matches[3];
                 $params = $execBag->expressionEvaluator->yaml($params, $scope);
             } else {
-                if (count ($node->childs) > 0) {
-                    $child = $node->childs[0];
-                    if ($child instanceof GoTextNode) {
-                        $params = $execBag->expressionEvaluator->yaml($child->text, $scope);
+                try {
+                    if (count($node->childs) > 0) {
+                        $child = $node->childs[0];
+                        if ($child instanceof GoTextNode) {
+                            $params = $execBag->expressionEvaluator->yaml($child->text, $scope);
+                        }
+                        if ($child instanceof GoCommentNode) {
+                            $params = $execBag->expressionEvaluator->yaml($child->text, $scope);
+                        }
                     }
-                    if ($child instanceof GoCommentNode) {
-                        $params = $execBag->expressionEvaluator->yaml($child->text, $scope);
-                    }
+                } catch (ParseException $e) {
+                    throw new ParseException("Cannot parse: {$e->getMessage()}\n{$child->text}", $e->getCode(), $e);
                 }
             }
 
