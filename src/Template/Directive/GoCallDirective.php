@@ -8,8 +8,10 @@
 
     namespace Html5\Template\Directive;
    
+    use Html5\Template\Node\GoCommentNode;
     use Html5\Template\Node\GoElementNode;
     use Html5\Template\GoTemplateDirectiveBag;
+    use Html5\Template\Node\GoTextNode;
 
     class GoCallDirective implements GoDirective
     {
@@ -39,15 +41,39 @@
             $name = $node->attributes["name"];
 
             $as = @$node->attributes["as"];
+            $datasource = @$node->attributes["datasource"];
 
-            if ( ! preg_match ("|([a-z0-9_\\.]+)\\s*\\((.*)\\)|i", trim ($name), $matches)) {
+            if ( ! preg_match ("|([a-z0-9_\\.]+)\\s*(\\((.*)\\)|)|i", trim ($name), $matches)) {
                 throw new \InvalidArgumentException("Cannot parse call name='$name'");
             }
 
             $callName = $matches[1];
-            $params = $matches[2];
 
-            $params = $execBag->expressionEvaluator->yaml($params, $scope);
+
+            $params = [];
+            if ($datasource != null) {
+                 if ( ! preg_match ("|([a-z0-9_\\.]+)\\s*\\((.*)\\)|i", trim ($datasource), $matchesDataSource)) {
+                    throw new \InvalidArgumentException("Cannot parse call name='$name'");
+                }
+                $datasourceCall = $matchesDataSource[1];
+                $params = $matches[2];
+                $params = $execBag->expressionEvaluator->yaml($params, $scope);
+                $params = ($this->callback)($datasourceCall, $params);
+            } else if (isset ($matches[3])) {
+                $params = $matches[3];
+                $params = $execBag->expressionEvaluator->yaml($params, $scope);
+            } else {
+                if (count ($node->childs) > 0) {
+                    $child = $node->childs[0];
+                    if ($child instanceof GoTextNode) {
+                        $params = $execBag->expressionEvaluator->yaml($child->text, $scope);
+                    }
+                    if ($child instanceof GoCommentNode) {
+                        $params = $execBag->expressionEvaluator->yaml($child->text, $scope);
+                    }
+                }
+            }
+
             $ret = ($this->callback)($callName, $params);
 
             if ($as !== null) {
