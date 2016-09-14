@@ -198,6 +198,27 @@ Template-Parsing: <10ms
 Rendering: <15ms
 ```
 
+
+## Installing V8JS on Ubuntu 16.04
+
+Since there is no apt package for v8js you have to do it manually:
+
+```
+sudo add-apt-repository ppa:pinepain/libv8-5.2
+sudo apt-get update
+sudo apt-get install libv8-dev  g++ cpp php-pear php7.0-dev
+sudo pecl install v8js
+
+sudo bash
+echo "extension=v8js.so" > /etc/php/7.0/apache2/conf.d/20-v8js.ini
+echo "extension=v8js.so">/etc/php/7.0/cli/conf.d/20-v8js.ini
+
+service apache2 restart
+```
+
+
+
+
 ## Author
 
 Written 2016 by Matthias Leuffen http://leuffen.de

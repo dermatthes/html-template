@@ -36,7 +36,7 @@
 
             $clone = clone $node;
             if ($val !== null)
-                return $val;
+                $clone->childs = [$val];
             return $clone;
         }
 
