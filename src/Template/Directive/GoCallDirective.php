@@ -43,7 +43,7 @@
             $as = @$node->attributes["as"];
             $datasource = @$node->attributes["datasource"];
 
-            if ( ! preg_match ("|([a-z0-9_\\.]+)\\s*(\\((.*)\\)|)|i", trim ($name), $matches)) {
+            if ( ! preg_match ("|([a-z0-9_\\.]+)\\s*(\\((.*)\\)\\|)|i", trim ($name), $matches)) {
                 throw new \InvalidArgumentException("Cannot parse call name='$name'");
             }
 
