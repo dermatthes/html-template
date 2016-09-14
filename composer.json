@@ -15,7 +15,7 @@
     "require": {
         "php": ">=7.0",
         "symfony/expression-language": "^3.1",
-        "symfony/yaml": "^3.1",
+        "symfony/yaml": "*",
         "html5/htmlreader": "*"
     },
     "autoload": {
