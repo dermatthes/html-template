@@ -75,7 +75,7 @@
                         }
                     }
                 } catch (ParseException $e) {
-                    throw new ParseException("Cannot parse: {$e->getMessage()}\n{$child->text}", $e->getCode(), $e);
+                    throw new ParseException("Cannot parse: {$e->getMessage()}\n{$child->text}", -1, null, null, $e);
                 }
             }
 
