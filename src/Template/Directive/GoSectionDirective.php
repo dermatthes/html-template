@@ -11,6 +11,22 @@
     use Html5\Template\Node\GoElementNode;
     use Html5\Template\GoTemplateDirectiveBag;
 
+
+    /**
+     * Class GoSectionDirective
+     *
+     * Define a parameter for go-call or go-extends
+     *
+     * <example>
+     *  <go-extends name="tpl.xy">
+     *      <go-section as="content">
+     *          .. Some Html ..
+     *      </go-section>
+     *  </go-extends>
+     * </example>
+     *
+     * @package Html5\Template\Directive
+     */
     class GoSectionDirective implements GoDirective
     {
 
@@ -28,10 +44,10 @@
 
         public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
-            $name = $node->attributes["name"];
+            $as = $node->attributes["as"];
 
-            if ( ! preg_match ("|([a-z0-9_]+)|i", $name)) {
-                throw new \InvalidArgumentException("Invalid go-section name='$name': Allowed [a-zA-Z0-9_]+");
+            if ( ! preg_match ("|([a-z0-9_]+)|i", $as)) {
+                throw new \InvalidArgumentException("Invalid go-section as='$as': Allowed [a-zA-Z0-9_]+");
             }
 
             $return = "";
@@ -39,7 +55,22 @@
                 $return .= $curChild->run($scope, $execBag);
             }
 
-            $execBag->dataToReturnScope[$name] = $return;
+            $asArray = false;
+            if (preg_match ("/(.+)\\[\\]/", $as, $matches)) {
+                $asArray = true;
+                $as = $matches[1];
+            }
+
+            if ($asArray) {
+                if ( ! isset ($execBag->dataToReturnScope[$as])) {
+                    $execBag->dataToReturnScope[$as] = [];
+                } else if ( ! is_array($execBag->dataToReturnScope[$as])) {
+                    $execBag->dataToReturnScope[$as] = [ $execBag->dataToReturnScope[$as] ];
+                }
+                $execBag->dataToReturnScope[$as][] = $return;
+                return false;
+            }
+            $execBag->dataToReturnScope[$as] = $return;
             return false;
         }
     }
