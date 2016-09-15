@@ -20,6 +20,7 @@
     use Html5\Template\Directive\GoIfDirective;
     use Html5\Template\Directive\GoInlineTextDirective;
     use Html5\Template\Directive\GoMacroDirective;
+    use Html5\Template\Directive\GoOutputDirective;
     use Html5\Template\Directive\GoRepeatDirective;
     use Html5\Template\Directive\GoSectionDirective;
     use Html5\Template\Directive\GoStructDirective;
@@ -64,6 +65,7 @@
             $this->addDirective(new GoStructDirective());
             $this->addDirective(new GoExtendsDirective());
             $this->addDirective(new GoCallDirective());
+            $this->addDirective(new GoOutputDirective());
 
             $this->htmlReader = new HTMLReader();
         }
