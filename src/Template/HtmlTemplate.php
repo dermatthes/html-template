@@ -14,6 +14,7 @@
     use Html5\Template\Directive\GoDirectiveExecBag;
     use Html5\Template\Expression\GoExpressionEvaluator;
     use Html5\Template\Expression\Scope;
+    use Html5\Template\Node\GoDocumentNode;
 
     class HtmlTemplate
     {
@@ -75,6 +76,15 @@
         }
 
 
+
+        public function build(string $inputTemplateData) : GoDocumentNode {
+            $this->mParser->loadHtml($inputTemplateData);
+            $template = $this->mParser->parse();
+            $template->setExecBag($this->mExecBag);
+            return $template;
+        }
+
+
         public function render(string $inputTemplateData, array $scopeData, &$structOutputData = []) : string
         {
             $scope = $this->mExecBag->scopePrototype;
@@ -82,10 +92,7 @@
                 $scope[$key] = $val;
             }
 
-
-            $this->mParser->loadHtml($inputTemplateData);
-
-            $template = $this->mParser->parse();
+            $template = $this->build($inputTemplateData);
 
             $ret = $template->run($scope, $this->mExecBag);
             if (is_array($ret))
@@ -94,15 +101,12 @@
         }
 
         public function renderStruct(string $inputTemplateData, array $scopeData, &$structOutputData = []) : array {
+
             $scope = $this->mExecBag->scopePrototype;
             foreach ($scopeData as $key => $val) {
                 $scope[$key] = $val;
             }
-
-
-            $this->mParser->loadHtml($inputTemplateData);
-
-            $template = $this->mParser->parse();
+            $template = $this->build($inputTemplateData);
 
             $ret = $template->run($scope, $this->mExecBag);
             if (is_string($ret))
@@ -110,6 +114,10 @@
             return $ret;
         }
 
+
+        public function buildFile ($filename) : GoDocumentNode {
+            return $this->build(file_get_contents($filename));
+        }
 
         public function renderHtmlFile($filename, array $scopeData = []) : string
         {

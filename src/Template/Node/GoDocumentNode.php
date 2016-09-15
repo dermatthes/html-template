@@ -20,6 +20,7 @@
         public $childs = [];
 
 
+        private $mExecBag = null;
 
         public function intercept($name) {
             
@@ -31,9 +32,16 @@
         }
 
 
+        public function setExecBag (GoDirectiveExecBag $execBag) {
+            $this->mExecBag = $execBag;
+        }
 
 
-        public function run(array &$scope, GoDirectiveExecBag $execBag) {
+
+        public function run(array &$scope, GoDirectiveExecBag $execBag=null) {
+            if ($execBag === null)
+                $execBag = $this->mExecBag;
+
             try {
                 $output = $this->processingInstructions;
                 foreach ($this->childs as $child) {

@@ -46,6 +46,8 @@
         {
             $return = "";
 
+           // $execBag->dataToReturnScope = [];
+
             if ($this->mExtendsCallback === null)
                 throw new \InvalidArgumentException("go-extends must be configured with valid callback. See documentation or unit-tests.");
 
