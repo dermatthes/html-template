@@ -77,22 +77,24 @@
 
 
 
-        public function build(string $inputTemplateData) : GoDocumentNode {
+        public function build(string $inputTemplateData, string $templateName="unnamed") : GoDocumentNode {
             $this->mParser->loadHtml($inputTemplateData);
             $template = $this->mParser->parse();
             $template->setExecBag($this->mExecBag);
+            $template->setTemplateName($templateName);
             return $template;
         }
 
 
-        public function render(string $inputTemplateData, array $scopeData, &$structOutputData = []) : string
+        public function render(string $inputTemplateData, array $scopeData, &$structOutputData = [], string $templateName="unnamed") : string
         {
             $scope = $this->mExecBag->scopePrototype;
             foreach ($scopeData as $key => $val) {
                 $scope[$key] = $val;
             }
 
-            $template = $this->build($inputTemplateData);
+            $template = $this->build($inputTemplateData, $templateName);
+
 
             $ret = $template->run($scope, $this->mExecBag);
             if (is_array($ret))
@@ -100,13 +102,13 @@
             return $ret;
         }
 
-        public function renderStruct(string $inputTemplateData, array $scopeData, &$structOutputData = []) : array {
+        public function renderStruct(string $inputTemplateData, array $scopeData, &$structOutputData = [], $templateName="unnamed") : array {
 
             $scope = $this->mExecBag->scopePrototype;
             foreach ($scopeData as $key => $val) {
                 $scope[$key] = $val;
             }
-            $template = $this->build($inputTemplateData);
+            $template = $this->build($inputTemplateData, $templateName);
 
             $ret = $template->run($scope, $this->mExecBag);
             if (is_string($ret))
@@ -116,17 +118,17 @@
 
 
         public function buildFile ($filename) : GoDocumentNode {
-            return $this->build(file_get_contents($filename));
+            return $this->build(file_get_contents($filename), $filename);
         }
 
         public function renderHtmlFile($filename, array $scopeData = []) : string
         {
-            return $this->render(file_get_contents($filename), $scopeData, $data);
+            return $this->render(file_get_contents($filename), $scopeData, $data, $filename);
         }
         
         public function renderStructHtmlFile($filename, array $scopeData = []) : array
         {
-            return $this->renderStruct(file_get_contents($filename), $scopeData, $data);
+            return $this->renderStruct(file_get_contents($filename), $scopeData, $data, $filename);
         }
 
 

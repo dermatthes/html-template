@@ -12,6 +12,7 @@
 
     use Html5\Template\Directive\Ex\GoReturnDataException;
     use Html5\Template\Directive\GoDirectiveExecBag;
+    use Html5\Template\Exception\TemplateRuntimeException;
 
     class GoDocumentNode implements GoNode {
 
@@ -21,6 +22,8 @@
 
 
         private $mExecBag = null;
+
+        private $mTemplateName = null;
 
         public function intercept($name) {
             
@@ -37,6 +40,22 @@
         }
 
 
+        /**
+         * Set the Template Name printed in Error-Reports
+         *
+         * @param string $name
+         * @return $this
+         */
+        public function setTemplateName(string $name) {
+            $this->mTemplateName = $name;
+            return $this;
+        }
+
+
+        public function getTemplateName () : string {
+            return $this->mTemplateName;
+        }
+
 
         public function run(array &$scope, GoDirectiveExecBag $execBag=null) {
             if ($execBag === null)
@@ -50,6 +69,10 @@
                 return $output;
             } catch (GoReturnDataException $e) {
                 return $e->getDataToReturn();
+            } catch (TemplateRuntimeException $e) {
+                throw $e; // Just throw
+            } catch (\Exception $e) {
+                throw new TemplateRuntimeException("RuntimeException in template: '{$this->mTemplateName}': {$e->getMessage()}", $e->getCode(), $e);
             }
         }
     }
