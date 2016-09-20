@@ -59,10 +59,10 @@
             foreach ($node->childs as $curChild) {
                 try {
                     $curChild->run($scope, $execBag);
-                    throw new \InvalidArgumentException("go-extends accepts only go-section as child!");
+                    throw new \InvalidArgumentException("go-extends accepts only go-param as child!");
                 } catch (GoReturnDataException $data) {
                     if ($data->isArray()) {
-                        if ( ! isset ($returnData[$data->getName()]))
+                        if ( ! isset ($params[$data->getName()]))
                             $params[$data->getName()] = [];
                         $params[$data->getName()][] = $data->getDataToReturn();
                     } else {
