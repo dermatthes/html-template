@@ -35,7 +35,7 @@
                 $defClasses = explode(" ", $node->attributes["class"]);
             }
 
-            $data = $execBag->expressionEvaluator->yaml($stmt, $scope);
+            $data = $execBag->expressionEvaluator->yaml($stmt, $scope, true);
             foreach ($data as $key => $value) {
                 if ($value == true) {
                     $defClasses[] = $key;

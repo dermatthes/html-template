@@ -29,7 +29,7 @@
             $this->dataToReturn = $dataToReturn;
             $this->isArray = false;
             $this->as = $as;
-            if(preg_match ("/(.*)\\[\\]$/", $as, $matches)) {
+            if($as !== null && preg_match ("/(.*)\\[\\]$/", $as, $matches)) {
                 $this->as = $matches[1];
                 $this->isArray = true;
             }

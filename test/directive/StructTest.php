@@ -18,9 +18,9 @@
 
             $t = new HtmlTemplate();
             $ret = $t->renderStructHtmlFile(__DIR__ . "/tpl/StructTest.html", []);
-
-            self::assertEquals(["param1"=>"Some Data", "content"=>"Some Other"], $ret);
             print_r ($ret);
+            self::assertEquals(["param1"=>"Some Data", "content"=>"Some Other"], $ret);
+
 
         }
 

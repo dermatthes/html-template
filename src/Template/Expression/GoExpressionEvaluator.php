@@ -38,11 +38,14 @@
             }
         }
         
-        public function yaml($expression, array $scope) {
+        public function yaml($expression, array $scope, $keyParse=false) {
             $type = Yaml::parse(trim($expression));
             if (is_array($type)) {
                 foreach ($type as $key => $val) {
-                    $type[$key] = $this->eval($val, $scope);
+                    if ($keyParse)
+                        $type[$key] = $this->eval($val, $scope);
+                    else
+                        $type[$key] = $val;
                 }
                 return $type;
             }

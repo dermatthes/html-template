@@ -5,13 +5,22 @@
     <title>Title</title>
 </head>
 <body>
+
+
     <!-- Everything outside go-struct is ignored -->
     <go-struct>
-        <go-section name="param1">Some Data</go-section>
-
-        <go-section name="content">Some Other</go-section>
-
-
+        <go-section as="ap[]">
+            <go-section as="a">1Some value</go-section>
+            <go-section as="b">1Some Other value</go-section>
+        </go-section>
+        <go-section as="ap[]">
+            <go-section as="a">aSome value</go-section>
+            <go-section as="b">bSome Other value</go-section>
+        </go-section>
+        <go-section as="param1">
+            <div>Some Html</div>
+        </go-section>
+        <go-section as="content">Some Other</go-section>
     </go-struct>
 
 </body>

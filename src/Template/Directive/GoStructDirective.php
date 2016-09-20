@@ -30,13 +30,28 @@
 
         public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
-            $return = "";
 
-            foreach ($node->childs as $curChild) {
-                $return .= $curChild->run($scope, $execBag);
+            $params = [];
+            foreach ($node->childs as $child) {
+                try {
+                    $child->run($scope, $execBag);
+                } catch (GoReturnDataException $data) {
+                    if ($data->isArray()) {
+                        if ( ! isset ($params[$data->getAs()]))
+                            $params[$data->getAs()] = [];
+                        $params[$data->getAs()][] = $data->getDataToReturn();
+                    } else {
+                        $params[$data->getAs()] = $data->getDataToReturn();
+                    }
+                }
+            }
+
+            if (isset ($node->attributes["as"])) {
+                $scope[$node->attributes["as"]] = $params;
+                return null;
             }
 
             // Return the colleced Data.
-            throw new GoReturnDataException($execBag->dataToReturnScope);
+            throw new GoReturnDataException($params);
         }
     }

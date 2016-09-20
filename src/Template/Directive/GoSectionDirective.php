@@ -8,6 +8,7 @@
 
     namespace Html5\Template\Directive;
 
+    use Doctrine\Instantiator\Exception\InvalidArgumentException;
     use Html5\Template\Directive\Ex\GoReturnDataException;
     use Html5\Template\Node\GoElementNode;
     use Html5\Template\GoTemplateDirectiveBag;
@@ -45,7 +46,11 @@
 
         public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
+
+            if ( ! isset ($node->attributes["as"]))
+                throw new InvalidArgumentException("go-section is missing 'as=' - attribute");
             $as = $node->attributes["as"];
+
 
 
 
@@ -57,16 +62,18 @@
                 throw new \InvalidArgumentException("Invalid go-section as='$as': Allowed [a-zA-Z0-9_]+");
             }
 
-            $returnData = [];
-
+            $returnData = null;
+            $returnHtml = "";
             if ($select !== null) {
                 $returnData = $execBag->expressionEvaluator->eval($select, $scope);
             } else {
-                $return = "";
+
                 foreach ($node->childs as $curChild) {
                     try {
-                        $return .= $curChild->run($scope, $execBag);
+                        $returnHtml .= $curChild->run($scope, $execBag);
                     } catch (GoReturnDataException $data) {
+                        if ($returnData === null)
+                            $returnData = [];
                         if ($data->isArray()) {
                             if ( ! isset ($returnData[$data->getAs()]))
                                 $returnData[$data->getAs()] = [];
@@ -74,13 +81,13 @@
                         } else {
                             $returnData[$data->getAs()] = $data->getDataToReturn();
                         }
+                        continue;
                     }
                 }
             }
 
-            if (strlen($as) < 1)
-                throw new \InvalidArgumentException("go-section requires as attribute");
-
+            if ($returnData === null)
+                throw new GoReturnDataException($returnHtml, $as);
             throw new GoReturnDataException($returnData, $as);
         }
     }
