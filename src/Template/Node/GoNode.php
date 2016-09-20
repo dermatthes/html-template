@@ -17,6 +17,6 @@
 
         public function render(array &$scope, GoDirectiveExecBag $execBag);
 
-        public function run(array &$scope, GoDirectiveExecBag $execBag);
+        public function run(array &$scope, GoDirectiveExecBag $execBag, $skipPre=false);
 
     }

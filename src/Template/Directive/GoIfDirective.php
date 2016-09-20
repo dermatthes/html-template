@@ -11,7 +11,7 @@
     use Html5\Template\Node\GoElementNode;
     use Html5\Template\GoTemplateDirectiveBag;
 
-    class GoIfDirective implements GoDirective
+    class GoIfDirective implements GoPreDirective
     {
 
 

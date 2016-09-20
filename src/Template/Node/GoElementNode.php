@@ -14,6 +14,7 @@
     use Html5\Template\Directive\GoDirective;
     use Html5\Template\Directive\GoDirectiveExecBag;
     use Html5\Template\Directive\GoInlineTextDirective;
+    use Html5\Template\Directive\GoPreDirective;
 
     class GoElementNode implements GoNode {
         public $parent = null;
@@ -89,11 +90,13 @@
             return $ret;
         }
 
-        public function run(array &$scope, GoDirectiveExecBag $execBag) {
+        public function run(array &$scope, GoDirectiveExecBag $execBag, $skipPre=false) {
             $output = null;
 
             $curNodeOrOutput = clone $this;
             foreach ($this->useDirectives as $curDirective) {
+                if ($curDirective instanceof GoPreDirective && $skipPre)
+                    continue;
                 $curNodeOrOutput = $curDirective->exec($curNodeOrOutput, $scope, $output, $execBag);
                 if ($curNodeOrOutput === false) {
                     return null;

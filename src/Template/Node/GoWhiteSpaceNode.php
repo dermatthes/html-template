@@ -25,7 +25,7 @@
             return $this->whitespace;
         }
 
-        public function run(array &$scope, GoDirectiveExecBag $execBag) {
+        public function run(array &$scope, GoDirectiveExecBag $execBag, $skipPre=false) {
             return $this->render($scope, $execBag);
         }
     }

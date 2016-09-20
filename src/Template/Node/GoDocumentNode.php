@@ -57,7 +57,7 @@
         }
 
 
-        public function run(array &$scope, GoDirectiveExecBag $execBag=null) {
+        public function run(array &$scope, GoDirectiveExecBag $execBag=null, $skipPre=false) {
             if ($execBag === null)
                 $execBag = $this->mExecBag;
 

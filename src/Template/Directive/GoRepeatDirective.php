@@ -17,7 +17,7 @@
     use Html5\Template\Node\GoElementNode;
     use Html5\Template\GoTemplateDirectiveBag;
 
-    class GoRepeatDirective implements GoDirective
+    class GoRepeatDirective implements GoPreDirective
     {
         
         public function register(GoTemplateDirectiveBag $bag)
@@ -27,7 +27,7 @@
         }
 
         public function getPriority() : int {
-            return 50;
+            return 998;
         }
 
         public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
@@ -44,7 +44,7 @@
                     $clone = clone $node;
                     $clone->attributes["go-repeat"] = "";
                     try {
-                        $output .= $clone->render($scope, $execBag);
+                        $output .= $clone->run($scope, $execBag, true);
                     } catch (GoBreakLoopException $e) {
                         break;
                     } catch (GoContinueLoopException $e) {
