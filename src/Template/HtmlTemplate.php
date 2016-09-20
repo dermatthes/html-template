@@ -101,7 +101,7 @@
             return $ret;
         }
 
-        public function renderStruct(string $inputTemplateData, array $scopeData, &$structOutputData = [], $templateName="unnamed") : array {
+        public function renderStruct(string $inputTemplateData, array $scopeData, &$structOutputData = [], $templateName="unnamed") {
 
             $scope = $this->mExecBag->scopePrototype;
             foreach ($scopeData as $key => $val) {
@@ -125,7 +125,7 @@
             return $this->render(file_get_contents($filename), $scopeData, $data, $filename);
         }
         
-        public function renderStructHtmlFile($filename, array $scopeData = []) : array
+        public function renderStructHtmlFile($filename, array $scopeData = [])
         {
             return $this->renderStruct(file_get_contents($filename), $scopeData, $data, $filename);
         }
