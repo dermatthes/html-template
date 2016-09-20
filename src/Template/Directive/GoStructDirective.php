@@ -37,11 +37,11 @@
                     $child->run($scope, $execBag);
                 } catch (GoReturnDataException $data) {
                     if ($data->isArray()) {
-                        if ( ! isset ($params[$data->getAs()]))
-                            $params[$data->getAs()] = [];
-                        $params[$data->getAs()][] = $data->getDataToReturn();
+                        if ( ! isset ($params[$data->getName()]))
+                            $params[$data->getName()] = [];
+                        $params[$data->getName()][] = $data->getDataToReturn();
                     } else {
-                        $params[$data->getAs()] = $data->getDataToReturn();
+                        $params[$data->getName()] = $data->getDataToReturn();
                     }
                 }
             }

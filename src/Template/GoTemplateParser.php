@@ -22,7 +22,7 @@
     use Html5\Template\Directive\GoMacroDirective;
     use Html5\Template\Directive\GoOutputDirective;
     use Html5\Template\Directive\GoRepeatDirective;
-    use Html5\Template\Directive\GoSectionDirective;
+    use Html5\Template\Directive\GoParamDirective;
     use Html5\Template\Directive\GoStructDirective;
     use Html5\Template\Exception\TemplateParsingException;
     use Html5\Template\Node\GoCommentNode;
@@ -62,7 +62,7 @@
             $this->addDirective(new GoCallMacroDirective());
             $this->addDirective(new GoDumpDirective());
             $this->addDirective(new GoInlineTextDirective());
-            $this->addDirective(new GoSectionDirective());
+            $this->addDirective(new GoParamDirective());
             $this->addDirective(new GoStructDirective());
             $this->addDirective(new GoExtendsDirective());
             $this->addDirective(new GoCallDirective());

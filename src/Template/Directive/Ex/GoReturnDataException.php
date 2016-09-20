@@ -21,16 +21,16 @@
     class GoReturnDataException extends \Exception {
 
         private $dataToReturn;
-        private $as;
+        private $name;
         private $isArray;
 
 
-        public function __construct($dataToReturn, string $as=null) {
+        public function __construct($dataToReturn, string $name=null) {
             $this->dataToReturn = $dataToReturn;
             $this->isArray = false;
-            $this->as = $as;
-            if($as !== null && preg_match ("/(.*)\\[\\]$/", $as, $matches)) {
-                $this->as = $matches[1];
+            $this->name = $name;
+            if($name !== null && preg_match ("/(.*)\\[\\]$/", $name, $matches)) {
+                $this->name = $matches[1];
                 $this->isArray = true;
             }
         }
@@ -39,8 +39,8 @@
             return $this->dataToReturn;
         }
 
-        public function getAs () {
-            return $this->as;
+        public function getName () {
+            return $this->name;
         }
 
         public function isArray() : bool {

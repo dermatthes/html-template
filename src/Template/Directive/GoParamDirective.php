@@ -15,27 +15,27 @@
 
 
     /**
-     * Class GoSectionDirective
+     * Class GoParamDirective
      *
      * Define a parameter for go-call or go-extends
      *
      * <example>
      *  <go-extends name="tpl.xy">
-     *      <go-section as="content">
+     *      <go-param name="content">
      *          .. Some Html ..
-     *      </go-section>
+     *      </go-param>
      *  </go-extends>
      * </example>
      *
      * @package Html5\Template\Directive
      */
-    class GoSectionDirective implements GoDirective
+    class GoParamDirective implements GoDirective
     {
 
 
         public function register(GoTemplateDirectiveBag $bag)
         {
-            $bag->elemToDirective["go-section"] = $this;
+            $bag->elemToDirective["go-param"] = $this;
             $bag->directiveClassNameMap[get_class($this)] = $this;
         }
 
@@ -47,9 +47,9 @@
         public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
 
-            if ( ! isset ($node->attributes["as"]))
-                throw new InvalidArgumentException("go-section is missing 'as=' - attribute");
-            $as = $node->attributes["as"];
+            if ( ! isset ($node->attributes["name"]))
+                throw new InvalidArgumentException("go-section is missing 'name=' - attribute");
+            $name = $node->attributes["name"];
 
 
 
@@ -58,8 +58,8 @@
             if (isset ($node->attributes["select"]))
                 $select = $node->attributes["select"];
 
-            if ( ! preg_match ("|([a-z0-9_]+)|i", $as)) {
-                throw new \InvalidArgumentException("Invalid go-section as='$as': Allowed [a-zA-Z0-9_]+");
+            if ( ! preg_match ("|([a-z0-9_]+)|i", $name)) {
+                throw new \InvalidArgumentException("Invalid go-param name='$name': Allowed [a-zA-Z0-9_]+");
             }
 
             $returnData = null;
@@ -75,11 +75,11 @@
                         if ($returnData === null)
                             $returnData = [];
                         if ($data->isArray()) {
-                            if ( ! isset ($returnData[$data->getAs()]))
-                                $returnData[$data->getAs()] = [];
-                            $returnData[$data->getAs()][] = $data->getDataToReturn();
+                            if ( ! isset ($returnData[$data->getName()]))
+                                $returnData[$data->getName()] = [];
+                            $returnData[$data->getName()][] = $data->getDataToReturn();
                         } else {
-                            $returnData[$data->getAs()] = $data->getDataToReturn();
+                            $returnData[$data->getName()] = $data->getDataToReturn();
                         }
                         continue;
                     }
@@ -87,7 +87,7 @@
             }
 
             if ($returnData === null)
-                throw new GoReturnDataException($returnHtml, $as);
-            throw new GoReturnDataException($returnData, $as);
+                throw new GoReturnDataException($returnHtml, $name);
+            throw new GoReturnDataException($returnData, $name);
         }
     }

@@ -42,7 +42,10 @@
         {
             $name = $node->attributes["name"];
 
-            $as = @$node->attributes["as"];
+            $as = null;
+            if (isset ($node->attributes["as"]))
+                $as = $node->attributes["as"];
+
             $datasource = @$node->attributes["datasource"];
             $parse = isset ($node->attributes["parse"]) ? $node->attributes["parse"] : "json";
             $parse = trim (strtoupper($parse));
@@ -73,11 +76,11 @@
                         $child->run($scope, $execBag);
                     } catch (GoReturnDataException $data) {
                         if ($data->isArray()) {
-                            if ( ! isset ($params[$data->getAs()]))
-                                $params[$data->getAs()] = [];
-                            $params[$data->getAs()][] = $data->getDataToReturn();
+                            if ( ! isset ($params[$data->getName()]))
+                                $params[$data->getName()] = [];
+                            $params[$data->getName()][] = $data->getDataToReturn();
                         } else {
-                            $params[$data->getAs()] = $data->getDataToReturn();
+                            $params[$data->getName()] = $data->getDataToReturn();
                         }
                     }
                 }
@@ -116,7 +119,6 @@
             $ret = ($this->callback)($callName, $params);
 
             if ($as !== null) {
-                throw new GoReturnDataException($ret, $as);
                 $scope[$as] = $ret;
                 return null;
             }
