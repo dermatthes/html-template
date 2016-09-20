@@ -73,7 +73,7 @@
                         $child->run($scope, $execBag);
                     } catch (GoReturnDataException $data) {
                         if ($data->isArray()) {
-                            if ( ! isset ($returnData[$data->getAs()]))
+                            if ( ! isset ($params[$data->getAs()]))
                                 $params[$data->getAs()] = [];
                             $params[$data->getAs()][] = $data->getDataToReturn();
                         } else {
