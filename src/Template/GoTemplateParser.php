@@ -24,6 +24,7 @@
     use Html5\Template\Directive\GoRepeatDirective;
     use Html5\Template\Directive\GoSectionDirective;
     use Html5\Template\Directive\GoStructDirective;
+    use Html5\Template\Exception\TemplateParsingException;
     use Html5\Template\Node\GoCommentNode;
     use Html5\Template\Node\GoDocumentNode;
     use Html5\Template\Node\GoElementNode;
@@ -104,9 +105,10 @@
         }
     
 
-        public function parse() : GoDocumentNode
+        public function parse($templateName="unnamed") : GoDocumentNode
         {
             $rootNode = new GoDocumentNode();
+            $rootNode->setTemplateName($templateName);
             $reader = $this->htmlReader;
             
             $reader->setHandler(new class ($rootNode, $this->directiveBag) implements HtmlCallback {
@@ -117,6 +119,12 @@
                  * @var GoNode
                  */
                 private $curNode;
+
+                /**
+                 * @var GoDocumentNode
+                 */
+                private $rootNode;
+
                 private $curLine = 1;
                 /**
                  * @var GoTemplateDirectiveBag
@@ -125,6 +133,7 @@
 
                 public function __construct(GoNode $rootNode, GoTemplateDirectiveBag $directiveBag) {
                     $this->curNode = $rootNode;
+                    $this->rootNode = $rootNode;
                     $this->directiveBag = $directiveBag;
                 }
 
@@ -188,6 +197,9 @@
                         return;
                     }
                     $this->curNode->postWhiteSpace = $this->curWhiteSpace;
+                    if ($this->curNode instanceof GoDocumentNode) {
+                        throw new TemplateParsingException("Closing Tag mismatch in template '{$this->rootNode->getTemplateName()}'.");
+                    }
                     $this->curNode = $this->curNode->parent;
                 }
 

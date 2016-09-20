@@ -11,6 +11,7 @@
 
     use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
     use Symfony\Component\ExpressionLanguage\SyntaxError;
+    use Symfony\Component\Yaml\Exception\RuntimeException;
     use Symfony\Component\Yaml\Yaml;
 
     class GoExpressionEvaluator {
@@ -32,6 +33,8 @@
                 return $this->language->evaluate($expression, $scope);
             } catch (SyntaxError $e) {
                 return null;
+            } catch (\Exception $e) {
+                throw new RuntimeException("{$e->getMessage()} on expression '$expression' in scope:\n". print_r ($scope, true), $e->getCode(), $e);
             }
         }
         

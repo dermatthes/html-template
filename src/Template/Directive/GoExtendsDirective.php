@@ -55,11 +55,23 @@
             if ( ! preg_match("|^[a-z0-9/\\._]+$|i", $name))
                 throw new \InvalidArgumentException("Invalid go-extends name='$name'");
 
+            $params = [];
             foreach ($node->childs as $curChild) {
-                $return .= $curChild->run($scope, $execBag);
+                try {
+                    $curChild->run($scope, $execBag);
+                    throw new \InvalidArgumentException("go-extends accepts only go-section as child!");
+                } catch (GoReturnDataException $data) {
+                    if ($data->isArray()) {
+                        if ( ! isset ($returnData[$data->getAs()]))
+                            $params[$data->getAs()] = [];
+                        $params[$data->getAs()][] = $data->getDataToReturn();
+                    } else {
+                        $params[$data->getAs()] = $data->getDataToReturn();
+                    }
+                }
             }
 
             // Return the colleced Data.
-            throw new GoReturnDataException(($this->mExtendsCallback)($name, $execBag->dataToReturnScope));
+            throw new GoReturnDataException(($this->mExtendsCallback)($name, $params));
         }
     }

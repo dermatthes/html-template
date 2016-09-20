@@ -77,7 +77,13 @@
             $ret .= ">";
 
             foreach ($this->childs as $child) {
-                $ret .= $child->run($scope, $execBag);
+                $curData = $child->run($scope, $execBag);
+                if (is_array($curData)) {
+                    print_r ($curData);
+                    throw new \Exception();
+                }
+
+                $ret .= $curData;
             }
             $ret .= "{$this->postWhiteSpace}</{$this->name}>";
             return $ret;

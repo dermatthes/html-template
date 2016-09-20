@@ -28,7 +28,6 @@
             $this->mInlineTextDirective = $inlineTextDirective;
         }
 
-
         public function render (array &$scope, GoDirectiveExecBag $execBag) {
             $text = htmlspecialchars(html_entity_decode($this->text));
             if ($this->mInlineTextDirective !== null) {

@@ -8,6 +8,7 @@
 
     namespace Html5\Template\Directive;
    
+    use Html5\Template\Directive\Ex\GoReturnDataException;
     use Html5\Template\Node\GoCommentNode;
     use Html5\Template\Node\GoElementNode;
     use Html5\Template\GoTemplateDirectiveBag;
@@ -55,7 +56,7 @@
 
             $params = [];
             if ($datasource != null) {
-                 if ( ! preg_match ("|([a-z0-9_\\.]+)\\s*\\((.*)\\)|i", trim ($datasource), $matchesDataSource)) {
+                if ( ! preg_match("|([a-z0-9_\\.]+)\\s*\\((.*)\\)|i", trim($datasource), $matchesDataSource)) {
                     throw new \InvalidArgumentException("Cannot parse call name='$name'");
                 }
                 $datasourceCall = $matchesDataSource[1];
@@ -65,6 +66,22 @@
             } else if (isset ($matches[3])) {
                 $params = $matches[3];
                 $params = $execBag->expressionEvaluator->yaml($params, $scope);
+            } else if (isset ($node->childs[0]) && $node->childs[0] instanceof GoElementNode) {
+                $params = [];
+                foreach ($node->childs as $child) {
+                    try {
+                        $child->run($scope, $execBag);
+                    } catch (GoReturnDataException $data) {
+                        if ($data->isArray()) {
+                            if ( ! isset ($returnData[$data->getAs()]))
+                                $params[$data->getAs()] = [];
+                            $params[$data->getAs()][] = $data->getDataToReturn();
+                        } else {
+                            $params[$data->getAs()] = $data->getDataToReturn();
+                        }
+                    }
+                }
+
             } else {
                 try {
                     $code = "";
@@ -99,6 +116,7 @@
             $ret = ($this->callback)($callName, $params);
 
             if ($as !== null) {
+                throw new GoReturnDataException($ret, $as);
                 $scope[$as] = $ret;
                 return null;
             }

@@ -8,6 +8,7 @@
 
     namespace Html5\Template\Directive;
 
+    use Html5\Template\Directive\Ex\GoReturnDataException;
     use Html5\Template\Node\GoElementNode;
     use Html5\Template\GoTemplateDirectiveBag;
 
@@ -46,31 +47,40 @@
         {
             $as = $node->attributes["as"];
 
+
+
+            $select = null;
+            if (isset ($node->attributes["select"]))
+                $select = $node->attributes["select"];
+
             if ( ! preg_match ("|([a-z0-9_]+)|i", $as)) {
                 throw new \InvalidArgumentException("Invalid go-section as='$as': Allowed [a-zA-Z0-9_]+");
             }
 
-            $return = "";
-            foreach ($node->childs as $curChild) {
-                $return .= $curChild->run($scope, $execBag);
-            }
+            $returnData = [];
 
-            $asArray = false;
-            if (preg_match ("/(.+)\\[\\]/", $as, $matches)) {
-                $asArray = true;
-                $as = $matches[1];
-            }
-
-            if ($asArray) {
-                if ( ! isset ($execBag->dataToReturnScope[$as])) {
-                    $execBag->dataToReturnScope[$as] = [];
-                } else if ( ! is_array($execBag->dataToReturnScope[$as])) {
-                    $execBag->dataToReturnScope[$as] = [ $execBag->dataToReturnScope[$as] ];
+            if ($select !== null) {
+                $returnData = $execBag->expressionEvaluator->eval($select, $scope);
+            } else {
+                $return = "";
+                foreach ($node->childs as $curChild) {
+                    try {
+                        $return .= $curChild->run($scope, $execBag);
+                    } catch (GoReturnDataException $data) {
+                        if ($data->isArray()) {
+                            if ( ! isset ($returnData[$data->getAs()]))
+                                $returnData[$data->getAs()] = [];
+                            $returnData[$data->getAs()][] = $data->getDataToReturn();
+                        } else {
+                            $returnData[$data->getAs()] = $data->getDataToReturn();
+                        }
+                    }
                 }
-                $execBag->dataToReturnScope[$as][] = $return;
-                return false;
             }
-            $execBag->dataToReturnScope[$as] = $return;
-            return false;
+
+            if (strlen($as) < 1)
+                throw new \InvalidArgumentException("go-section requires as attribute");
+
+            throw new GoReturnDataException($returnData, $as);
         }
     }

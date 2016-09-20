@@ -79,9 +79,8 @@
 
         public function build(string $inputTemplateData, string $templateName="unnamed") : GoDocumentNode {
             $this->mParser->loadHtml($inputTemplateData);
-            $template = $this->mParser->parse();
+            $template = $this->mParser->parse($templateName);
             $template->setExecBag($this->mExecBag);
-            $template->setTemplateName($templateName);
             return $template;
         }
 
