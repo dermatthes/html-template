@@ -30,6 +30,8 @@
         {
             $stmt = $node->attributes["go-class"];
 
+            echo "runnint";
+
             $defClasses = [];
             if (isset ($node->attributes["class"])) {
                 $defClasses = explode(" ", $node->attributes["class"]);

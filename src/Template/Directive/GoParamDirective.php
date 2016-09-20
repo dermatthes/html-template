@@ -41,7 +41,7 @@
 
         public function getPriority() : int
         {
-            return 999;
+            return 58;
         }
 
         public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
@@ -75,7 +75,7 @@
                         if ($returnData === null)
                             $returnData = [];
                         if ($data->isArray()) {
-                            if ( ! isset ($returnData->{$data->getName()}))
+                            if ( ! isset ($returnData[$data->getName()]))
                                 $returnData[$data->getName()] = [];
                             $returnData[$data->getName()][] = $data->getDataToReturn();
                         } else {

@@ -39,7 +39,7 @@
                     if ($returnData === null)
                         $returnData = [];
                     if ($data->isArray()) {
-                        if ( ! isset ($returnData->{$data->getName()}))
+                        if ( ! isset ($returnData[$data->getName()]))
                             $returnData[$data->getName()] = [];
                         $returnData[$data->getName()][] = $data->getDataToReturn();
                     } else {
