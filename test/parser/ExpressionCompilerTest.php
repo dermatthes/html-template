@@ -21,5 +21,18 @@
     
             print_r ($c->yaml("{wurst: someData == true, muh: string('someOther')}", ['someData'=>true]));
         }
+
+        public function testStructAccess () {
+            $data1 = new \stdClass();
+            $data1->wurst = new \stdClass();
+            $data1->wurst->a = "b";
+            $data = [
+                    "a" => [
+                            "b" => "c"
+                    ]
+            ];
+            $c = new GoExpressionEvaluator();
+            self::assertEquals("c", $c->eval("a.b", $data));
+        }
     
     }
