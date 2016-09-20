@@ -57,6 +57,7 @@
             $callName = $matches[1];
 
 
+            $returnData = null;
             $params = [];
             if ($datasource != null) {
                 if ( ! preg_match("|([a-z0-9_\\.]+)\\s*\\((.*)\\)|i", trim($datasource), $matchesDataSource)) {
@@ -70,19 +71,23 @@
                 $params = $matches[3];
                 $params = $execBag->expressionEvaluator->yaml($params, $scope);
             } else if (isset ($node->childs[0]) && $node->childs[0] instanceof GoElementNode) {
-                $params = [];
+
                 foreach ($node->childs as $child) {
                     try {
                         $child->run($scope, $execBag);
                     } catch (GoReturnDataException $data) {
+                        if ($returnData === null)
+                            $returnData = new \stdClass();
                         if ($data->isArray()) {
-                            if ( ! isset ($params[$data->getName()]))
-                                $params[$data->getName()] = [];
-                            $params[$data->getName()][] = $data->getDataToReturn();
+                            if ( ! isset ($returnData->{$data->getName()}))
+                                $returnData->{$data->getName()} = [];
+                            $returnData->{$data->getName()}[] = $data->getDataToReturn();
                         } else {
-                            $params[$data->getName()] = $data->getDataToReturn();
+                            $returnData->{$data->getName()} = $data->getDataToReturn();
                         }
+
                     }
+                    $params = $returnData;
                 }
 
             } else {

@@ -35,7 +35,7 @@
             $output = "";
 
 
-            if (preg_match ('/^(.*)\s+as\s+([a-z0-9_]+)$/i', trim ($stmt), $matches)) {
+            if (preg_match ('/^(.*)\s+as\s+([a-zA-Z0-9_]+)$/i', trim ($stmt), $matches)) {
                 $data = $execBag->expressionEvaluator->eval($matches[1], $scope);
                 if ( ! is_array($data))
                     return "";

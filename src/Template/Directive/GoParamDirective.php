@@ -73,13 +73,13 @@
                         $returnHtml .= $curChild->run($scope, $execBag);
                     } catch (GoReturnDataException $data) {
                         if ($returnData === null)
-                            $returnData = [];
+                            $returnData = new \stdClass();
                         if ($data->isArray()) {
-                            if ( ! isset ($returnData[$data->getName()]))
-                                $returnData[$data->getName()] = [];
-                            $returnData[$data->getName()][] = $data->getDataToReturn();
+                            if ( ! isset ($returnData->{$data->getName()}))
+                                $returnData->{$data->getName()} = [];
+                            $returnData->{$data->getName()}[] = $data->getDataToReturn();
                         } else {
-                            $returnData[$data->getName()] = $data->getDataToReturn();
+                            $returnData->{$data->getName()} = $data->getDataToReturn();
                         }
                         continue;
                     }
