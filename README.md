@@ -6,6 +6,7 @@ angularjs-like inline-templates for PHP7.
 > Planned as replacement for PHPTAL - which is quite fine but not enough extensible
 > for cluster / platform usage.
 
+
 Gismo Template does not precompile any code. It generates the pages on the fly.
 
 
