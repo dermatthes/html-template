@@ -29,8 +29,8 @@
         public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
             $data = $scope;
-            if (isset ($node->attributes["name"])) {
-                 $data = $execBag->expressionEvaluator->eval($node->attributes["name"], $scope);
+            if (isset ($node->attributes["select"])) {
+                 $data = $execBag->expressionEvaluator->eval($node->attributes["select"], $scope);
             }
             return "<pre><div>Dump:</div><div>" . print_r($data, true) . "</div></pre>";
         }
