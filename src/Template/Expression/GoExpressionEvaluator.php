@@ -9,8 +9,8 @@
     namespace Html5\Template\Expression;
 
 
-    use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
-    use Symfony\Component\ExpressionLanguage\SyntaxError;
+    use Gismo\Component\ExpressionLanguage\ExpressionLanguage;
+    use Gismo\Component\ExpressionLanguage\SyntaxError;
     use Symfony\Component\Yaml\Exception\RuntimeException;
     use Symfony\Component\Yaml\Yaml;
 
