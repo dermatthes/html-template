@@ -30,7 +30,7 @@
 
         public function eval($expression, array $scope) {
             try {
-                return $this->language->evaluate($expression, $scope);
+                return $this->language->evaluate($expression, $scope, false);
             } catch (SyntaxError $e) {
                 return null;
             } catch (\Exception $e) {
