@@ -17,6 +17,7 @@ class EncodingTest extends TestCase
 {
 
 
+    
     public function testPropertiesEncodeCorrectly () {
         $t = new HtmlTemplate();
         $ret = $t->render('<div type="&quot;\'{}@">" &quot; &amp;</div>', []);
