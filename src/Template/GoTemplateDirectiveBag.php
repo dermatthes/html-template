@@ -21,7 +21,14 @@
         /**
          * @var GoDirective[]
          */
+        public $elemNsToDirective = [];
+
+        /**
+         * @var GoDirective[]
+         */
         public $attrToDirective = [];
+
+
 
         /**
          * @var GoInlineTextDirective

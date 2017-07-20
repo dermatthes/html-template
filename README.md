@@ -1,4 +1,8 @@
+
+[![Downloads this Month](https://img.shields.io/packagist/dm/html5/html-template.svg)](https://packagist.org/packages/html5/html-template)
 [<img src="https://travis-ci.org/dermatthes/html-template.svg">](https://travis-ci.org/dermatthes/html-template)
+[![Latest Stable Version](https://poser.pugx.org/html5/html-template/v/stable)](https://github.com/dermatthes/html-template/releases)
+
 
 # Html5 Template - Template Rendering
 angularjs-like inline-templates for PHP7.
