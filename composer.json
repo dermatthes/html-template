@@ -16,7 +16,7 @@
         "php": ">=7.0",
         "gismo/expression-language": "^3.1",
         "symfony/yaml": "*",
-        "html5/htmlreader": "^1.1.0"
+        "html5/htmlreader": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.2"
