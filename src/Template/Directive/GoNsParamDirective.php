@@ -29,13 +29,12 @@
      *
      * @package Html5\Template\Directive
      */
-    class GoParamDirective implements GoDirective
+    class GoNsParamDirective implements GoDirective
     {
 
 
         public function register(GoTemplateDirectiveBag $bag)
         {
-            $bag->elemToDirective["go-param"] = $this;
             $bag->elemNsToDirective["param"] = $this;
             $bag->directiveClassNameMap[get_class($this)] = $this;
         }
@@ -47,10 +46,7 @@
 
         public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
-
-            if ( ! isset ($node->attributes["name"]))
-                throw new InvalidArgumentException("go-section is missing 'name=' - attribute");
-            $name = $node->attributes["name"];
+            $name = $node->name;
 
 
 
@@ -59,8 +55,8 @@
             if (isset ($node->attributes["select"]))
                 $select = $node->attributes["select"];
 
-            if ( ! preg_match ("|([a-z0-9_]+)|i", $name)) {
-                throw new \InvalidArgumentException("Invalid go-param name='$name': Allowed [a-zA-Z0-9_]+");
+            if ( ! preg_match ("|([a-z0-9_-]+)|i", $name)) {
+                throw new \InvalidArgumentException("Invalid <param:name ='param:$name': Allowed [a-zA-Z0-9_-]+");
             }
 
             $returnData = null;

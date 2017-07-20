@@ -19,6 +19,7 @@
     class GoElementNode implements GoNode {
         public $parent = null;
 
+        public $ns = null;
         public $name;
         public $lineNo;
         public $attributes = [];
@@ -55,7 +56,11 @@
 
 
         public function render(array &$scope, GoDirectiveExecBag $execBag) {
-            $ret = "{$this->preWhiteSpace}<{$this->name}";
+            $ns = "";
+            if ($this->ns !== null)
+                $ns = "{$this->ns}:";
+            
+            $ret = "{$this->preWhiteSpace}<{$ns}{$this->name}";
             $attrs = [];
             foreach ($this->attributes as $name=>$val) {
 
@@ -86,7 +91,7 @@
 
                 $ret .= $curData;
             }
-            $ret .= "{$this->postWhiteSpace}</{$this->name}>";
+            $ret .= "{$this->postWhiteSpace}</{$ns}{$this->name}>";
             return $ret;
         }
 

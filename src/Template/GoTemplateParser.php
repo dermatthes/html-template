@@ -146,6 +146,8 @@
 
                 public function onTagOpen(string $name, array $attributes, $isEmpty, $ns=null) {
                     $newNode = new GoElementNode();
+
+                    $newNode->ns = $ns;
                     $newNode->name = $name;
                     $newNode->lineNo = $this->curLine;
 
@@ -157,7 +159,9 @@
 
                     $newNode->useInlineTextDirective($this->directiveBag->textDirective);
 
-                    if (isset ($this->directiveBag->elemToDirective[$newNode->name])) {
+                    if ($newNode->ns !== null && isset ($this->directiveBag->elemNsToDirective[$newNode->ns])) {
+                        $newNode->useDirective($this->directiveBag->elemNsToDirective[$newNode->ns]);
+                    } else if (isset ($this->directiveBag->elemToDirective[$newNode->name])) {
                         $newNode->useDirective($this->directiveBag->elemToDirective[$newNode->name]);
                     }
 

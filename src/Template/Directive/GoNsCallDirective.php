@@ -2,27 +2,25 @@
     /**
      * Created by PhpStorm.
      * User: matthes
-     * Date: 01.08.16
-     * Time: 11:52
+     * Date: 20.07.17
+     * Time: 11:20
      */
 
     namespace Html5\Template\Directive;
-   
+
+
     use Html5\Template\Directive\Ex\GoReturnDataException;
+    use Html5\Template\GoTemplateDirectiveBag;
     use Html5\Template\Node\GoCommentNode;
     use Html5\Template\Node\GoElementNode;
-    use Html5\Template\GoTemplateDirectiveBag;
     use Html5\Template\Node\GoTextNode;
     use Symfony\Component\Yaml\Exception\ParseException;
 
-    class GoCallDirective implements GoDirective
-    {
-
+    class GoNsCallDirective implements GoDirective {
 
         public function register(GoTemplateDirectiveBag $bag)
         {
-            $bag->elemToDirective["go-call"] = $this;
-            
+            $bag->elemNsToDirective["call"] = $this;
             $bag->directiveClassNameMap[get_class($this)] = $this;
         }
 
@@ -41,37 +39,20 @@
 
         public function exec(GoElementNode $node, array &$scope, &$output, GoDirectiveExecBag $execBag)
         {
-            $name = $node->attributes["name"];
+            $callName = $node->name;
 
             $as = null;
             if (isset ($node->attributes["as"]))
                 $as = $node->attributes["as"];
 
-            $datasource = @$node->attributes["datasource"];
             $parse = isset ($node->attributes["parse"]) ? $node->attributes["parse"] : "json";
             $parse = trim (strtoupper($parse));
-
-            if ( ! preg_match ("|([a-z0-9_\\.]+)\\s*(\\((.*)\\))?|i", trim ($name), $matches)) {
-                throw new \InvalidArgumentException("Cannot parse call name='$name'");
-            }
-
-            $callName = $matches[1];
 
 
             $returnData = null;
             $params = [];
-            if ($datasource != null) {
-                if ( ! preg_match("|([a-z0-9_\\.]+)\\s*\\((.*)\\)|i", trim($datasource), $matchesDataSource)) {
-                    throw new \InvalidArgumentException("Cannot parse call name='$name'");
-                }
-                $datasourceCall = $matchesDataSource[1];
-                $params = $matches[2];
-                $params = $execBag->expressionEvaluator->yaml($params, $scope);
-                $params = ($this->callback)($datasourceCall, $params);
-            } else if (isset ($matches[3])) {
-                $params = $matches[3];
-                $params = $execBag->expressionEvaluator->yaml($params, $scope);
-            } else if (isset ($node->childs[0]) && $node->childs[0] instanceof GoElementNode) {
+
+            if (isset ($node->childs[0]) && $node->childs[0] instanceof GoElementNode) {
 
                 foreach ($node->childs as $child) {
                     try {
