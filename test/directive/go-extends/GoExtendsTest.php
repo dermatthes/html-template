@@ -2,6 +2,7 @@
     namespace Gismo\Test\Component;
     use Html5\Template\Directive\GoExtendsDirective;
     use Html5\Template\HtmlTemplate;
+    use PHPUnit\Framework\TestCase;
 
     /**
      * Created by PhpStorm.
@@ -9,7 +10,7 @@
      * Date: 17.08.16
      * Time: 11:52
      */
-    class GoExtendsTest extends \PHPUnit_Framework_TestCase {
+    class GoExtendsTest extends TestCase {
 
 
         public function testExtensWorks () {

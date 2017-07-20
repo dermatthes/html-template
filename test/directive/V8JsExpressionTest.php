@@ -10,8 +10,10 @@
 
 
     use Html5\Template\Expression\V8ExpressionEvaluator;
+    use PHPUnit\Framework\TestCase;
+    use SebastianBergmann\Comparator\TestClass;
 
-    class V8JsExpressionTest extends \PHPUnit_Framework_TestCase
+    class V8JsExpressionTest extends TestCase
     {
 
 

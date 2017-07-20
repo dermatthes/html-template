@@ -10,8 +10,9 @@
 
 
     use Html5\Template\HtmlTemplate;
+    use PHPUnit\Framework\TestCase;
 
-    class ParserTest extends \PHPUnit_Framework_TestCase
+    class ParserTest extends TestCase
     {
     
     

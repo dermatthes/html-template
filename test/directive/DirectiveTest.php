@@ -11,8 +11,9 @@
     namespace Gismo\Test\Component;
 
     use Html5\Template\HtmlTemplate;
+    use PHPUnit\Framework\TestCase;
 
-    class DirectiveTest extends \PHPUnit_Framework_TestCase {
+    class DirectiveTest extends TestCase {
 
         
         public function testAllDirectives () {

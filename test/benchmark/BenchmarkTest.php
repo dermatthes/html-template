@@ -3,6 +3,7 @@
     namespace Gismo\Test\Component;
     use Html5\Template\HtmlTemplate;
     use Html5\Template\GoTemplateParser;
+    use PHPUnit\Framework\TestCase;
 
     /**
      * Created by PhpStorm.
@@ -10,7 +11,7 @@
      * Date: 28.07.16
      * Time: 20:37
      */
-    class BenchmarkTest extends \PHPUnit_Framework_TestCase
+    class BenchmarkTest extends TestCase
     {
     
     

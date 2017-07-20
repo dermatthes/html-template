@@ -11,8 +11,9 @@ namespace Html5\Template\Test;
 
 use Html5\Template\GoTemplateParser;
 use Html5\Template\HtmlTemplate;
+use PHPUnit\Framework\TestCase;
 
-class EncodingTest extends \PHPUnit_Framework_TestCase
+class EncodingTest extends TestCase
 {
 
 

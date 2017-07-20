@@ -144,7 +144,7 @@
                     $this->curWhiteSpace = $ws;
                 }
 
-                public function onTagOpen(string $name, array $attributes, $isEmpty) {
+                public function onTagOpen(string $name, array $attributes, $isEmpty, $ns=null) {
                     $newNode = new GoElementNode();
                     $newNode->name = $name;
                     $newNode->lineNo = $this->curLine;
@@ -191,7 +191,7 @@
                     $this->curNode->childs[] = $text;
                 }
 
-                public function onTagClose(string $name) {
+                public function onTagClose(string $name, $ns=null) {
                     if (in_array($name, $this->html5EmptyTags)) {
                         //Ignore
                         return;
