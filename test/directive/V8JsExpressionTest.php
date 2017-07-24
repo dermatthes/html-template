@@ -16,7 +16,7 @@
     class V8JsExpressionTest extends TestCase
     {
 
-
+/*
         function testScope () {
             $eval = new V8ExpressionEvaluator();
             $scope = ["cde" => "wurst"];
@@ -39,5 +39,5 @@
             echo "\nTime: " . (microtime(true) - $time);
         }
 
-
+*/
     }
