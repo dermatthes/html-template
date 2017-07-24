@@ -73,6 +73,7 @@
                 }
 
             } else {
+                /*
                 try {
                     $code = "";
                     if (count($node->childs) > 0) {
@@ -101,6 +102,7 @@
                 } catch (ParseException $e) {
                     throw new ParseException("Cannot parse: {$e->getMessage()}\n{$child->text}", -1, null, null, $e);
                 }
+                */
             }
 
             $ret = ($this->callback)($callName, $params);
