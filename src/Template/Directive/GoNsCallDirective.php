@@ -45,7 +45,7 @@
             if (isset ($node->attributes["as"]))
                 $as = $node->attributes["as"];
 
-            $parse = isset ($node->attributes["parse"]) ? $node->attributes["parse"] : "json";
+            $parse = isset ($node->attributes["parse"]) ? strtoupper($node->attributes["parse"]) : null;
             $parse = trim (strtoupper($parse));
 
 
@@ -73,7 +73,6 @@
                 }
 
             } else {
-                /*
                 try {
                     $code = "";
                     if (count($node->childs) > 0) {
@@ -102,7 +101,6 @@
                 } catch (ParseException $e) {
                     throw new ParseException("Cannot parse: {$e->getMessage()}\n{$child->text}", -1, null, null, $e);
                 }
-                */
             }
 
             $ret = ($this->callback)($callName, $params);

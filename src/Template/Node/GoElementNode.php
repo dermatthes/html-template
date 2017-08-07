@@ -88,7 +88,8 @@
                     print_r ($curData);
                     throw new \Exception();
                 }
-
+                if ($this->name == "script" || $this->name == "style")
+                    $curData = html_entity_decode($curData);
                 $ret .= $curData;
             }
             $ret .= "{$this->postWhiteSpace}</{$ns}{$this->name}>";
